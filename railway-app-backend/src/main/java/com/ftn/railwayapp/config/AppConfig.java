@@ -33,12 +33,9 @@ public class AppConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://localhost:4200")
-                .allowedMethods("*")
-                .allowedHeaders("*")
-                .exposedHeaders("Authorization")
-                .allowCredentials(true)
-                .maxAge(MAX_AGE_SECS);
+                .allowedOrigins("http://localhost:4200") // Add your frontend URL
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowCredentials(true);;
     }
 
     @Bean

@@ -1,0 +1,13 @@
+<div class="welcome-container">
+    <div class="photo">
+        <img src="./../../../../assets/images/Railway-background.png" alt="Train">
+    </div>
+    <div class="content">
+        <h1 class="center-content">Serbian Railways</h1>
+        <h2 class="center-content">We make sure that you arrive on time!</h2>
+
+        <app-login-form *ngIf="showLogin"></app-login-form>
+        <app-registration-form *ngIf="!showLogin"></app-registration-form>
+    </div>
+
+</div>

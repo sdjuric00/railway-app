@@ -1,5 +1,5 @@
 package com.ftn.railwayapp.response;
 
 
-public record LoginResponse(String token, UserResponse userResponse) {
+public record LoginResponse(String token, UserSecurityResponse userSecurityResponse) {
 }

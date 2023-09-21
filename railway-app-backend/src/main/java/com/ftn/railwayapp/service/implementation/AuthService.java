@@ -2,7 +2,7 @@ package com.ftn.railwayapp.service.implementation;
 
 import com.ftn.railwayapp.exception.InvalidCredentialsException;
 import com.ftn.railwayapp.response.LoginResponse;
-import com.ftn.railwayapp.response.UserResponse;
+import com.ftn.railwayapp.response.UserSecurityResponse;
 import com.ftn.railwayapp.security.JWTUtils;
 import com.ftn.railwayapp.security.UserPrinciple;
 import com.ftn.railwayapp.service.interfaces.IAuthService;
@@ -42,9 +42,9 @@ public class AuthService implements IAuthService {
 
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         UserPrinciple userPrinciple = (UserPrinciple) authenticate.getPrincipal();
-        UserResponse userResponse = userPrinciple.getUser();
+        UserSecurityResponse userSecurityResponse = userPrinciple.getUser();
 
-        return new LoginResponse(JWTUtils.generateJWT(email), userResponse);
+        return new LoginResponse(JWTUtils.generateJWT(email), userSecurityResponse);
     }
 
 }

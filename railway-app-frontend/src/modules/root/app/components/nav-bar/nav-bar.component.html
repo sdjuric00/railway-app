@@ -1,0 +1,36 @@
+<mat-toolbar color="primary" class="mat-elevation-z3">
+    <a [routerLink]="['/railway-system/user/home']">
+        <img src="./../../../../../assets/images/Icon-white.png" alt="Train" class="app-icon" />
+    </a>
+    <div class="spacer regular-links">
+        <div>
+            &nbsp;&nbsp;
+            <a [routerLink]="['/railway-system/user/home']" routerLinkActive="active"
+                >Home</a>
+            <a [routerLink]="['/railway-system/user/home']">Transaction</a>
+
+        </div>
+
+        <!-- <div class="spacer">
+            <div *ngIf="loggedUser && isAdmin">
+                &nbsp;&nbsp;
+                <a [routerLink]="['/banking-system/admin/home']" routerLinkActive="active" mat-button
+                    color="primary">Home</a>
+                <a [routerLink]="['/banking-system/admin/reports']" routerLinkActive="active" mat-button
+                    color="primary">Reports</a>
+                <a [routerLink]="['/banking-system/admin/new-employer']" routerLinkActive="active" mat-button
+                    color="primary">Employer</a>
+            </div>
+        </div> -->
+
+    </div>
+    <a *ngIf="!loggedUser" [routerLink]="['/railway-system/auth/login']" routerLinkActive="active" mat-button
+     class="button-link" id="login">Log in</a>
+    <a *ngIf="!loggedUser" [routerLink]="['/railway-system/auth/register']" routerLinkActive="active" mat-raised-button
+        class="button-link a-sign-up">Sign up</a>
+
+
+    <div *ngIf="loggedUser" class="temp">
+        <button mat-raised-button>Log out</button>
+    </div>
+</mat-toolbar>

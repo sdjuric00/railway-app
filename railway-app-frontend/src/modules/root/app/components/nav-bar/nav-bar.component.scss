@@ -1,0 +1,53 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.temp {
+    position: relative;
+    display: inline-block;
+}
+
+.bottomRight {
+    bottom: 0;
+    right: 0;
+}
+
+.app-icon {
+    margin-top: 0.6rem;
+    height: 3.5rem;
+    width: 3.5rem;
+}
+
+a.a-sign-up {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 0.4rem;
+    color: var(--lightest-navy);
+}
+
+#login {
+    padding: 0.4rem;
+}
+
+#login:hover {
+    border-radius: 1rem;
+    border: 3px solid white;
+}
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    margin-left: 2rem;
+}
+
+.button-link {
+    font-size: 1.1rem;
+    padding: 0.4rem;
+}
+
+.regular-links a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--deep-blue);
+    text-decoration-thickness: 0.15rem;
+}

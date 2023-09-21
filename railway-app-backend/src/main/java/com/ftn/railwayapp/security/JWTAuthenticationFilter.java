@@ -4,7 +4,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ftn.railwayapp.exception.EntityNotFoundException;
 import com.ftn.railwayapp.exception.InvalidJWTException;
 import com.ftn.railwayapp.model.user.User;
-import com.ftn.railwayapp.response.UserResponse;
+import com.ftn.railwayapp.response.UserSecurityResponse;
 import com.ftn.railwayapp.service.implementation.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -65,14 +65,14 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private UsernamePasswordAuthenticationToken getSpringAuthToken(User user) {
-        return getUsernamePasswordAuthenticationToken(new UserResponse(user.getEmail(), user.getPassword(), user.getRole()));
+        return getUsernamePasswordAuthenticationToken(new UserSecurityResponse(user.getId(), user.getEmail(), user.getPassword(), user.getRole()));
     }
 
-    private UsernamePasswordAuthenticationToken getUsernamePasswordAuthenticationToken(UserResponse userResponse) {
-        UserPrinciple principal = new UserPrinciple(userResponse);
+    private UsernamePasswordAuthenticationToken getUsernamePasswordAuthenticationToken(UserSecurityResponse userSecurityResponse) {
+        UserPrinciple principal = new UserPrinciple(userSecurityResponse);
 
         return new UsernamePasswordAuthenticationToken(
-                userResponse.email(),
+                userSecurityResponse.email(),
                 principal.getPassword(),
                 principal.getAuthorities()
         );

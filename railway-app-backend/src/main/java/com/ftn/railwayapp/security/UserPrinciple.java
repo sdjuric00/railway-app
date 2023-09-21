@@ -1,6 +1,6 @@
 package com.ftn.railwayapp.security;
 
-import com.ftn.railwayapp.response.UserResponse;
+import com.ftn.railwayapp.response.UserSecurityResponse;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,27 +11,27 @@ import java.util.List;
 
 public class UserPrinciple implements UserDetails {
 
-    private final UserResponse userResponse;
+    private final UserSecurityResponse userSecurityResponse;
 
-    public UserPrinciple(UserResponse userResponse) {
-        this.userResponse = userResponse;
+    public UserPrinciple(UserSecurityResponse userSecurityResponse) {
+        this.userSecurityResponse = userSecurityResponse;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(userResponse.role().getAuthority()));
+        authorities.add(new SimpleGrantedAuthority(userSecurityResponse.role().getAuthority()));
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return userResponse.password();
+        return userSecurityResponse.password();
     }
 
     @Override
     public String getUsername() {
-        return userResponse.email();
+        return userSecurityResponse.email();
     }
 
     @Override
@@ -54,8 +54,8 @@ public class UserPrinciple implements UserDetails {
         return true;
     }
 
-    public UserResponse getUser() {
-        return userResponse;
+    public UserSecurityResponse getUser() {
+        return userSecurityResponse;
     }
 
 }

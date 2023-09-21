@@ -1,0 +1,47 @@
+<div class="login-container center-content">
+    <h3>Please, Log in</h3>
+    <form class="center-content" color="primary" [formGroup]="loginForm">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="text" name="email" />
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field class="password-field" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" name="password"
+                placeholder="Enter password" />
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon class="mat-icon-deep-blue">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="
+                    loginForm.get('password')?.hasError('minlength') &&
+                    !loginForm.get('password')?.hasError('required')
+                  ">
+                Password should contains at least 6 characters(at least 1 num and special character)
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+    </form>
+
+    <a href="#">Forgot your password?</a>
+
+    <br>
+
+    <button class="login-btn" mat-raised-button color="primary" (click)="logIn()">Log in</button>
+
+    <p class="or-paragraph">Or log in with</p>
+
+    <img src="./../../../../assets/images/Google.png" alt="Google"/>
+
+    <p>Not a member? <a [routerLink]="['/railway-system/auth/register']">Sign up!</a></p>
+
+</div>

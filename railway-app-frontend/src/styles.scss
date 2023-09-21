@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-size: 1rem;
+    background-color: var(--white);
+    color: var(--light-navy);
+    height: 100%;
+    background-color: var(--gray);
+}
+
+:root {
+    --gray: #dfe2e6ec;
+    --green: #547a54;
+    --red: #b73e3e;
+    --white: #ffffff;
+    --dark-navy: #020c1b;
+    --navy: #0a192f;
+    --light-navy: #335184;
+    --lightest-navy: #395f9f;
+    --slate: #757d94;
+    --light-slate: #b8bdce;
+    --transparent-green: rgba(100, 255, 219, 0.139);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.center-content {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
