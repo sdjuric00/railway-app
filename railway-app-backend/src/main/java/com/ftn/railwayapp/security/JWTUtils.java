@@ -2,6 +2,7 @@ package com.ftn.railwayapp.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.ftn.railwayapp.exception.InvalidJWTException;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Date;
@@ -39,10 +40,6 @@ public class JWTUtils {
         if (email == null)
             throw new InvalidJWTException("Cannot extract email/subject from jwt!");
         return email;
-    }
-
-    public static String extractFingerprintFromJWT(DecodedJWT jwt) {
-        return jwt.getClaim(FingerprintProperties.FINGERPRINT_CLAIM).asString();
     }
 
     public static boolean jwtHasExpired(String token) {

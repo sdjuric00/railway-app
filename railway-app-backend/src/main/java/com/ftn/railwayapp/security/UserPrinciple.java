@@ -12,6 +12,7 @@ import java.util.List;
 public class UserPrinciple implements UserDetails {
 
     private final UserResponse userResponse;
+
     public UserPrinciple(UserResponse userResponse) {
         this.userResponse = userResponse;
     }

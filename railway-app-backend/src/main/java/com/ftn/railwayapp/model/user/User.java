@@ -34,8 +34,15 @@ public abstract class User {
     @Column(nullable = false)
     private Gender gender;
 
+    @Column(nullable = false)
+    private boolean verified;
+
     @OneToOne()
     @JoinColumn(name = "address_id")
     private Address address;
+
+    @OneToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    protected Role role;
 
 }
