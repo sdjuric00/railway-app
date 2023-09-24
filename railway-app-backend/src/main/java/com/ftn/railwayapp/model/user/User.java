@@ -26,10 +26,7 @@ public abstract class User {
     private String password;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String surname;
+    private String fullName;
 
     @Column(nullable = false)
     private Gender gender;
@@ -37,12 +34,34 @@ public abstract class User {
     @Column(nullable = false)
     private boolean verified;
 
-    @OneToOne()
+    @Column(nullable = false)
+    private boolean socialAccount;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
     @OneToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     protected Role role;
+
+    public User(String email,
+                String password,
+                String fullName,
+                Gender gender,
+                Address address,
+                Role role,
+                boolean verified,
+                boolean socialAccount
+    ) {
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.address = address;
+        this.role = role;
+        this.verified = verified;
+        this.socialAccount = socialAccount;
+    }
 
 }

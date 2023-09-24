@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LoginResponse, UserSecurityResponse } from 'src/modules/shared/model/user';
+import { LoginResponse, UserLoginResponse } from 'src/modules/shared/model/user';
 import { LoginRequest } from 'src/modules/shared/requests/login-request';
 import { ConfigService } from 'src/modules/shared/services/config/config.service';
 
@@ -10,7 +10,7 @@ import { ConfigService } from 'src/modules/shared/services/config/config.service
 })
 export class AuthService {
 
-  public currentUser$: BehaviorSubject<UserSecurityResponse | null> = new BehaviorSubject<UserSecurityResponse | null>(null);
+  public currentUser$: BehaviorSubject<UserLoginResponse | null> = new BehaviorSubject<UserLoginResponse | null>(null);
 
   constructor(private configService: ConfigService, private http: HttpClient) {
     this.currentUser$.next(null);
@@ -23,13 +23,18 @@ export class AuthService {
     );
   }
 
+  onSocialLogin(tokenId: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(
+      this.configService.SOCIAL_LOGIN_URL,
+      tokenId
+    );
+  }
+
   setLocalStorage(loginResponse: LoginResponse): void {
     localStorage.setItem('token', loginResponse.token);
-    localStorage.setItem('user', JSON.stringify(loginResponse.userSecurityResponse));
-    console.log(loginResponse)
-    console.log(loginResponse.userSecurityResponse)
-    localStorage.setItem('email', loginResponse.userSecurityResponse.email);
-    this.currentUser$.next(loginResponse.userSecurityResponse);
+    localStorage.setItem('user', JSON.stringify(loginResponse.userLoginResponse));
+    localStorage.setItem('user_id', loginResponse.userLoginResponse.id.toString());
+    this.currentUser$.next(loginResponse.userLoginResponse);
   }
 
   logOut(): Observable<null> {

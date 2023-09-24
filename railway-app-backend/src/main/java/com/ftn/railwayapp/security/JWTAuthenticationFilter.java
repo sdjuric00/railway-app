@@ -2,6 +2,7 @@ package com.ftn.railwayapp.security;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ftn.railwayapp.exception.EntityNotFoundException;
+import com.ftn.railwayapp.exception.InvalidCredentialsException;
 import com.ftn.railwayapp.exception.InvalidJWTException;
 import com.ftn.railwayapp.model.user.User;
 import com.ftn.railwayapp.response.UserSecurityResponse;
@@ -52,20 +53,22 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private Authentication getAuthentication(HttpServletRequest request) {
         try {
             return getUsernamePasswordAuthentication(request);
-        } catch (EntityNotFoundException | InvalidJWTException e) {
+        } catch (EntityNotFoundException | InvalidJWTException | InvalidCredentialsException e) {
             return null;
         }
     }
 
-    private Authentication getUsernamePasswordAuthentication(HttpServletRequest request) throws EntityNotFoundException, InvalidJWTException {
+    private Authentication getUsernamePasswordAuthentication(HttpServletRequest request) throws EntityNotFoundException, InvalidJWTException, InvalidCredentialsException {
         DecodedJWT jwt = JWTUtils.extractJWTFromRequest(request);
         User user = userService.getVerifiedUser(JWTUtils.extractEmailFromJWT(jwt));
+        if (user.isSocialAccount()) { throw new InvalidCredentialsException();}
 
         return getSpringAuthToken(user);
     }
 
     private UsernamePasswordAuthenticationToken getSpringAuthToken(User user) {
-        return getUsernamePasswordAuthenticationToken(new UserSecurityResponse(user.getId(), user.getEmail(), user.getPassword(), user.getRole()));
+        return getUsernamePasswordAuthenticationToken(new UserSecurityResponse(user.getId(),
+                user.getEmail(), user.getPassword(), user.getRole(), user.isSocialAccount()));
     }
 
     private UsernamePasswordAuthenticationToken getUsernamePasswordAuthenticationToken(UserSecurityResponse userSecurityResponse) {

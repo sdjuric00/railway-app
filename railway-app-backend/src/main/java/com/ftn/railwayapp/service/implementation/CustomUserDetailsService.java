@@ -23,7 +23,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserSecurityResponse userSecurityResponse;
         try {
             User user = userService.getVerifiedUser(email);
-            userSecurityResponse = new UserSecurityResponse(user.getId(), user.getEmail(), user.getPassword(), user.getRole());
+            userSecurityResponse = new UserSecurityResponse(user.getId(), user.getEmail(),
+                    user.getPassword(), user.getRole(), user.isSocialAccount());
         } catch (EntityNotFoundException e) {
             return null;
         }

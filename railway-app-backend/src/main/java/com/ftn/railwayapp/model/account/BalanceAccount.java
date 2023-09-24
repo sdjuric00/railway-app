@@ -19,7 +19,7 @@ public class BalanceAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String accountNum;
 
     @Column
@@ -30,5 +30,11 @@ public class BalanceAccount {
 
     @OneToMany(mappedBy = "balanceAccount")
     private List<BalanceTransaction> transactions = new ArrayList<>();
+
+    public BalanceAccount(String accountNum) {
+        this.accountNum = accountNum;
+        this.tokensNum = 0;
+        this.totalTokenSpending = 0;
+    }
 
 }

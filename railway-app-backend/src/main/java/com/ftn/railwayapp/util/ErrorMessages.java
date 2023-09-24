@@ -8,5 +8,6 @@ public class ErrorMessages {
             "Password must contain at least 6 characters. " +
                     "At least one number and one special character.";
     public static final String PASSWORD_NOT_LONG_ENOUGH = "Password must be between 6 and 50 characters long.";
+    public static final String INVALID_SOCIAL_TOKEN = "Social token is invalid.";
 
 }

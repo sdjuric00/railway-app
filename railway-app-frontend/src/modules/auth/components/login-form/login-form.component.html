@@ -40,7 +40,10 @@
 
     <p class="or-paragraph">Or log in with</p>
 
-    <img src="./../../../../assets/images/Google.png" alt="Google"/>
+    <div class="socials">
+        <asl-google-signin-button width="200" class="google-btn center-content" shape="circle" type='standard' size='large'></asl-google-signin-button>
+        <button (click)="signInWithMicrosoft()" class="microsoft-btn">Sign In with Microsoft<img src="./../../../../assets/images/Microsoft.png" alt="Microsoft"></button>
+    </div>
 
     <p>Not a member? <a [routerLink]="['/railway-system/auth/register']">Sign up!</a></p>
 

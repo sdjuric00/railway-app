@@ -4,7 +4,7 @@ export interface Role {
     roleName:string
 }
 
-export interface UserSecurityResponse {
+export interface UserLoginResponse {
     id: number,
     email: string,
     role: Role
@@ -12,5 +12,5 @@ export interface UserSecurityResponse {
 
 export interface LoginResponse {
     token: string;
-    userSecurityResponse: UserSecurityResponse;
+    userLoginResponse: UserLoginResponse;
 }

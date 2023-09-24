@@ -8,13 +8,14 @@ import { SharedModule } from "../shared/shared.module";
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import { GoogleSigninButtonModule } from "@abacritt/angularx-social-login";
+
 
 @NgModule({
   declarations: [
-  
-    WelcomePageComponent,
-       LoginFormComponent,
-       RegistrationFormComponent
+      WelcomePageComponent,
+      LoginFormComponent,
+      RegistrationFormComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +23,10 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
-    RouterModule.forChild(AuthRoutes)
-  ]
+    RouterModule.forChild(AuthRoutes),
+    GoogleSigninButtonModule
+  ],
+  providers: [
+  ],
 })
 export class AuthModule { }

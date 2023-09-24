@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/modules/auth/services/auth/auth.service';
-import { UserSecurityResponse } from 'src/modules/shared/model/user';
+import { UserLoginResponse } from 'src/modules/shared/model/user';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +10,7 @@ import { UserSecurityResponse } from 'src/modules/shared/model/user';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit, OnDestroy {
-  loggedUser: UserSecurityResponse;
+  loggedUser: UserLoginResponse;
   authSubscription: Subscription;
   isAdmin: boolean;
 
