@@ -4,7 +4,7 @@ insert into role(role_name) values
     ('ROLE_REGULAR');
 
 
-insert into address(city, street, number, zip_code) values
+insert into address(city, street, street_number, zipcode) values
     ('Novi Sad', 'Laze Kostica', '10', '21000'),
     ('Novi Sad', 'Maksima Gorkog', '2', '21000'),
     ('Novi Sad', 'Laze Kostica', '10', '21000');

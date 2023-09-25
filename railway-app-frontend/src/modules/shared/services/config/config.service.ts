@@ -16,4 +16,14 @@ export class ConfigService {
   SOCIAL_LOGIN_URL = `${this.AUTH_URL}/social-login`;
   LOGOUT_URL = `${this.AUTH_URL}/logout`;
 
+  ///////////REGULAR_USER//////////
+  REGULAR_USER_URL = `${this.API_URL}/regular-user`;
+  REGISTER_REGULAR_USER_URL = `${this.REGULAR_USER_URL}/register`;
+  ACTIVATE_ACCOUNT_URL = `${this.REGULAR_USER_URL}/activate-account`
+
+  ////////////VERIFY//////////////
+  VERIFY_USER_URL = `${this.API_URL}/verify`;
+  SEND_CODE_AGAIN_URL = `${this.API_URL}/send-code-again`;
+
+
 }

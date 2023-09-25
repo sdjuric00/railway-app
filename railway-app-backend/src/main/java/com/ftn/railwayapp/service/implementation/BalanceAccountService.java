@@ -5,7 +5,8 @@ import com.ftn.railwayapp.repository.BalanceAccountRepository;
 import com.ftn.railwayapp.service.interfaces.IBalanceAccountService;
 import org.springframework.stereotype.Service;
 
-import static com.ftn.railwayapp.util.Constants.generateSecurityCode;
+import static com.ftn.railwayapp.util.Helper.generateBalanceAccountNumber;
+
 
 @Service
 public class BalanceAccountService implements IBalanceAccountService {
@@ -18,7 +19,7 @@ public class BalanceAccountService implements IBalanceAccountService {
 
     @Override
     public BalanceAccount createBalanceAccount() {
-        String accNumber = generateSecurityCode();
+        String accNumber = generateBalanceAccountNumber();
 
         return new BalanceAccount(accNumber);
     }

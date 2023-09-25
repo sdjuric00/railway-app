@@ -23,15 +23,15 @@ public class Address {
     private String street;
 
     @Column(nullable = false)
-    private String number;
+    private String streetNumber;
 
     @Column(nullable = false)
-    private String zipCode;
+    private String zipcode;
 
-    public Address(String city, String street, String number, String zipCode) {
+    public Address(String city, String street, String streetNumber, String zipcode) {
         this.city = city;
-        this.zipCode = zipCode;
+        this.zipcode = zipcode;
         this.street = street;
-        this.number = number;
+        this.streetNumber = streetNumber;
     }
 }

@@ -69,7 +69,7 @@ public class AuthService implements IAuthService {
     private LoginResponse logInOrRegister(GoogleIdToken.Payload payload)
             throws EntityNotFoundException, InvalidCredentialsException
     {
-        Optional<User> user = userService.getVerifiedUserExistance(payload.getEmail());
+        Optional<User> user = userService.getVerifiedUserExistence(payload.getEmail());
 
         return user.isPresent() ? this.socialLogin(UserResponse.fromUser(user.get()))
                 : this.socialLogin(regularUserService.socialRegistration(payload.getEmail(), (String) payload.get("name")));

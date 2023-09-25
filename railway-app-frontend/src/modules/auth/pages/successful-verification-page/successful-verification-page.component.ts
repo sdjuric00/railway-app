@@ -11,7 +11,7 @@ export class SuccessfulVerificationPageComponent {
    constructor(private router: Router) { }
 
   redirectToLogin() {
-    this.router.navigate(['/railway-system/auth/login']);
+    this.router.navigate(['/railway-system/railway-system/auth/login']);
   }
 
 }

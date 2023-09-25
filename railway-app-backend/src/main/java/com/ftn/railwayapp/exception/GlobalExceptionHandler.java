@@ -50,4 +50,28 @@ public class GlobalExceptionHandler {
                 .orElse("Error not found");
     }
 
+    @ExceptionHandler(value = EntityAlreadyExistException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String entityAlreadyExistException(EntityAlreadyExistException exception) {
+        return exception.getMessage();
+    }
+
+    @ExceptionHandler(value = MailCannotBeSentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String mailCannotBeSentException(MailCannotBeSentException exception) {
+        return exception.getMessage();
+    }
+
+    @ExceptionHandler(value = PasswordsDoNotMatchException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String passwordsDoNotMatchException(PasswordsDoNotMatchException exception) {
+        return exception.getMessage();
+    }
+
+    @ExceptionHandler(value = WrongVerifyTryException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String wrongVerifyTryException(WrongVerifyTryException exception) {
+        return exception.getMessage();
+    }
+
 }

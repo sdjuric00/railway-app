@@ -24,8 +24,14 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Optional<User> getVerifiedUserExistance(String email) {
+    public Optional<User> getVerifiedUserExistence(String email) {
         return userRepository.getVerifiedUser(email);
+    }
+
+    @Override
+    public boolean checkIfUserAlreadyExists(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.isPresent();
     }
 
 }

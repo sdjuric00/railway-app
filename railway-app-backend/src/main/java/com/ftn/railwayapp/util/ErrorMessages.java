@@ -9,5 +9,12 @@ public class ErrorMessages {
                     "At least one number and one special character.";
     public static final String PASSWORD_NOT_LONG_ENOUGH = "Password must be between 6 and 50 characters long.";
     public static final String INVALID_SOCIAL_TOKEN = "Social token is invalid.";
+    public static final String WRONG_GENDER = "Gender must be selected.";
+    public static final String WRONG_FULL_NAME = "Full name must contain only letters and cannot be too long/empty.";
+    public static final String WRONG_CITY = "City must contain only letters and cannot be too long/empty.";
+    public static final String WRONG_STREET = "Street must contain only letters and cannot be too long/empty.";
+    public static final String WRONG_ZIPCODE = "Zipcode must be 5-digit number";
+    public static final String WRONG_STREET_NUMBER = "Street number cannot be too long/empty.";
+
 
 }
