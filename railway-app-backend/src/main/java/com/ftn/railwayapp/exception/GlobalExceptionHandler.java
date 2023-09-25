@@ -2,10 +2,14 @@ package com.ftn.railwayapp.exception;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.client.HttpClientErrorException;
+
+
+import java.util.Optional;
 
 import static com.ftn.railwayapp.util.ExceptionMessages.TOKEN_EXPIRED_MESSAGE;
 
@@ -34,6 +38,16 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String tokenExpiredException(TokenExpiredException exception) {
         return TOKEN_EXPIRED_MESSAGE;
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected String handleMethodArgumentNotValid(MethodArgumentNotValidException methodArgumentNotValidException) {
+        Optional<FieldError> error = methodArgumentNotValidException.getBindingResult().getFieldErrors().stream().findFirst();
+
+        return error.map(
+                        fieldError -> String.format("%s", fieldError.getDefaultMessage()))
+                .orElse("Error not found");
     }
 
 }

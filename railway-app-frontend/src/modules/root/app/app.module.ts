@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RootLayoutComponent } from './components/root-layout/root-layout.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/modules/material/material.module';
 import { AuthModule } from 'src/modules/auth/auth.module';
 import { SocialLoginModule, GoogleSigninButtonModule, GoogleLoginProvider, SocialAuthServiceConfig, MicrosoftLoginProvider } from '@abacritt/angularx-social-login';
 import { enviroments } from 'src/enviroments/enviroments';
+import { CommonModule } from '@angular/common';
+import { ToastrModule, provideToastr } from 'ngx-toastr';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { enviroments } from 'src/enviroments/enviroments';
     NavBarComponent
   ],
   imports: [
+    CommonModule,
+    ToastrModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -40,7 +44,6 @@ import { enviroments } from 'src/enviroments/enviroments';
           {
             id: MicrosoftLoginProvider.PROVIDER_ID,
             provider: new MicrosoftLoginProvider(enviroments.microsoftClientId,{
-                // Add the desired scope(s) here
                 scopes: ['user.read', 'profile', 'email']
               })
           },
@@ -49,7 +52,15 @@ import { enviroments } from 'src/enviroments/enviroments';
           console.log(err);
         }
       } as SocialAuthServiceConfig,
-    }],
+    },
+    provideAnimations(),
+    provideToastr({
+      timeOut: 4000,
+      positionClass: 'toast-bottom-left',
+      preventDuplicates: true,
+      progressBar: true
+    })
+  ],
   exports: [
     GoogleSigninButtonModule, // Export the component
   ],

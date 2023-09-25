@@ -10,6 +10,7 @@ import {
   SocialAuthService,
   SocialUser,
 } from '@abacritt/angularx-social-login';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-form',
@@ -30,7 +31,8 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService, 
               private router: Router,
-              private socialAuthService: SocialAuthService
+              private socialAuthService: SocialAuthService,
+              private toastr: ToastrService
   ) {
     this.hide = true
     this.socialUser = null
@@ -61,7 +63,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
           // this.router.navigate(['/railway-system/shared/home']);
         },
         error => {
-          // this.toast.error(error.error, 'Login failed');
+          this.toastr.error(error.error, 'Error happened.')
         });}
       }
 
@@ -74,7 +76,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         console.log(userResponse);
       },
       err => {
-
+        this.toastr.error(err.error, 'Error happened.')
       }
     )
   }

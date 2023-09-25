@@ -5,4 +5,6 @@ import static com.ftn.railwayapp.util.ExceptionMessages.INVALID_CREDENTIALS_MESS
 public class InvalidCredentialsException extends AppException {
 
     public InvalidCredentialsException() {super(INVALID_CREDENTIALS_MESSAGE);}
+
+    public InvalidCredentialsException(String message) {super(message);}
 }
