@@ -1,0 +1,88 @@
+
+.verification-container {
+    margin: 5% 20%;
+    background-color: white;
+    border-radius: 1rem;
+    border: 2px solid var(--slate);
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 3rem 4rem;
+    box-shadow: 0 0 0 5px var(--light-blue-transparent);
+    transition: box-shadow 0.3s;
+}
+
+h1 {
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+
+h3 {
+    margin: 0 0 0.5rem;
+    padding: 0;
+    line-height: 1.25;
+    font-size: 1.8rem;
+}
+
+span#explanation-text {
+    font-size: 1.2rem;
+}
+
+span#input-places {
+    display: inline;
+}
+
+#form {
+    max-width: 350px;
+    margin: 25px auto 0;
+}
+
+input {
+    margin: 0 5px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 50px;
+    border: solid 1px #ccc;
+    box-shadow: 0 0 5px #ccc inset;
+    outline: none;
+    width: 20%;
+    transition: all .2s ease-in-out;
+    border-radius: 3px;
+}
+
+input:focus {
+    border-color: rgb(0, 2, 128);
+    box-shadow: 0 0 5px rgb(0, 2, 128) inset;
+}
+
+input::selection {
+    background: transparent;
+}
+
+button.verify-btn {
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    font-weight: bold;
+    padding: 1.2rem;
+}
+
+button.btn-link {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font-family: arial, sans-serif;
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--deep-blue);
+    font-size: 1.2rem;
+}
+
+input:invalid {
+    border: 2px solid red;
+}
+
+mat-icon.mail-icon {
+    transform: scale(4);
+    margin-bottom: 5%;
+}

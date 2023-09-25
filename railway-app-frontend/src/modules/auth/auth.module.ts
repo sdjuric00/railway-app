@@ -9,6 +9,8 @@ import { WelcomePageComponent } from './pages/welcome-page/welcome-page.componen
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { GoogleSigninButtonModule } from "@abacritt/angularx-social-login";
+import { VerificationPageComponent } from './pages/verification-page/verification-page.component';
+import { SuccessfulVerificationPageComponent } from './pages/successful-verification-page/successful-verification-page.component';
 
 
 @NgModule({
@@ -16,6 +18,8 @@ import { GoogleSigninButtonModule } from "@abacritt/angularx-social-login";
       WelcomePageComponent,
       LoginFormComponent,
       RegistrationFormComponent,
+      VerificationPageComponent,
+      SuccessfulVerificationPageComponent,
   ],
   imports: [
     CommonModule,

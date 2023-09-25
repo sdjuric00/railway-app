@@ -1,0 +1,32 @@
+
+.verification-container {
+    margin: 5% 30%;
+    border: 2px solid var(--light-slate);
+    border-radius: 1rem;
+    box-shadow: 0 0 0 5px var(--light-blue-transparent);
+    background-color: white;
+    padding: 2rem;
+
+    h1 {
+        font-weight: bold;
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    span.hello-text {
+        font-weight: bold;
+        font-size: 1.4rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    button {
+        border-radius: 1rem;
+        font-size: 1.2rem;
+        margin: 1.5rem 0 3rem 0;
+    }
+
+}

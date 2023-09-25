@@ -58,7 +58,8 @@ import { ToastrModule, provideToastr } from 'ngx-toastr';
       timeOut: 4000,
       positionClass: 'toast-bottom-left',
       preventDuplicates: true,
-      progressBar: true
+      progressBar: true,
+      closeButton: true
     })
   ],
   exports: [

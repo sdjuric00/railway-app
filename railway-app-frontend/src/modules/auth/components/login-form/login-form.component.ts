@@ -19,10 +19,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
 
-  hide: boolean;
+  hide: boolean
   socialUser: SocialUser | null
 
-  authSubscription: Subscription;
+  authSubscription: Subscription
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required ]),

@@ -4,18 +4,14 @@ import { CommonModule } from "@angular/common";
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from "./interceptors/auth-interceptor";
 
+
 @NgModule({
-  declarations: [
+  declarations: [  
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    MaterialModule,
-    // ToastrModule.forRoot({
-    //   positionClass: 'toast-bottom-left',
-    //   preventDuplicates: true,
-    //   closeButton: true,
-    // })
+    MaterialModule
   ],
   exports: [
   ],

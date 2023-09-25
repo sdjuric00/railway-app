@@ -1,1 +1,153 @@
-<p>registration-form works!</p>
+<div class="center-content registration-container">
+
+    <h3>Become our member and register here!</h3>
+    <form color="primary" [formGroup]="registrationForm">
+
+        <div class="center-content fields-row" style="display: flex;">
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="text" name="email" />
+                <mat-error *ngIf="registrationForm.get('email')?.hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="registrationForm.get('email')?.hasError('email') &&
+                !registrationForm.get('email')?.hasError('required')">
+                    Email is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field  class="full-width" appearance="fill">
+                <mat-label>Full Name</mat-label>
+                <input matInput formControlName="fullName" type="text" name="fullName" />
+                <mat-error *ngIf="registrationForm.get('fullName')?.hasError('required')">
+                    Full name is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="registrationForm.get('fullName')?.hasError('minlength') ||
+                registrationForm.get('fullName')?.hasError('pattern') &&
+                !registrationForm.get('fullName')?.hasError('required')">
+                    Full name is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+
+        <div class="center-content fields-row" style="display: flex;">
+
+            <mat-form-field class="password-field" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" name="password"
+                    placeholder="Enter password" />
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon class="mat-icon-deep-blue">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-error *ngIf="
+                                registrationForm.get('password')?.hasError('minlength') ||
+                                registrationForm.get('password')?.hasError('pattern') &&
+                                !registrationForm.get('password')?.hasError('required')
+                              ">
+                    Password should contains at least 6 characters(at least 1 num and special character)
+                </mat-error>
+                <mat-error *ngIf="registrationForm.get('password')?.hasError('required')">
+                    Password is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="password-field" appearance="fill">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" name="password"
+                    placeholder="Enter password" />
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon class="mat-icon-deep-blue">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-error *ngIf="
+                                            registrationForm.get('confirmPassword')?.hasError('minlength') ||
+                                            registrationForm.get('confirmPassword')?.hasError('pattern') &&
+                                            !registrationForm.get('confirmPassword')?.hasError('required')
+                                          ">
+                    Password should contains at least 6 characters(at least 1 num and special character)
+                </mat-error>
+                <mat-error *ngIf="registrationForm.get('confirmPassword')?.hasError('required')">
+                    Password is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+
+        <div class="center-content fields-row" style="display: flex;">
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city" type="text" name="city" />
+                <mat-error *ngIf="registrationForm.get('city')?.hasError('required')">
+                    City is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="registrationForm.get('city')?.hasError('pattern') &&
+                            !registrationForm.get('city')?.hasError('required')">
+                    City is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Street</mat-label>
+                <input matInput formControlName="street" type="text" name="street" />
+                <mat-error *ngIf="registrationForm.get('street')?.hasError('required')">
+                    Street is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="registrationForm.get('street')?.hasError('pattern') &&
+                            !registrationForm.get('street')?.hasError('required')">
+                    Street is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+
+        <div class="center-content fields-row" style="display: flex;">
+        
+            <mat-form-field class="last-row-fields" appearance="fill">
+                <mat-label>Street number</mat-label>
+                <input matInput formControlName="streetNumber" type="text" name="streetNumber" />
+                <mat-error *ngIf="registrationForm.get('streetNumber')?.hasError('required')">
+                    Street number is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="registrationForm.get('streetNumber')?.hasError('pattern') &&
+                                    !registrationForm.get('streetNumber')?.hasError('required')">
+                    Street number is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+        
+            <mat-form-field class="last-row-fields" appearance="fill">
+                <mat-label>Zipcode</mat-label>
+                <input matInput formControlName="zipcode" type="number" name="zipcode" />
+                <mat-error *ngIf="registrationForm.get('zipcode')?.hasError('required')">
+                    Zipcode is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="registrationForm.get('zipcode')?.hasError('pattern') &&
+                                    !registrationForm.get('zipcode')?.hasError('required')">
+                    Zipcode is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="last-row-fields">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="gender">
+                    <mat-option *ngFor="let gender of genderOptions" [value]="gender.value">
+                        {{gender.viewValue}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="registrationForm.get('gender')?.hasError('required')">
+                    Gender is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        
+        </div>
+
+    </form>
+    
+    <button color="primary" mat-raised-button (click)="register()">Register</button>
+
+    <p class="login-link">Already a member? <a [routerLink]="['/railway-system/auth/login']">Log in!</a></p>
+
+</div>
