@@ -59,7 +59,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         this.authSubscription = this.authService.login(loginRequest).subscribe(
         userResponse => {
           this.authService.setLocalStorage(userResponse);
-          console.log(userResponse);
+          //TODO
           // this.router.navigate(['/railway-system/shared/home']);
         },
         error => {

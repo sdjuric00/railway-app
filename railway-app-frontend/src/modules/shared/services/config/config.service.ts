@@ -23,7 +23,7 @@ export class ConfigService {
 
   ////////////VERIFY//////////////
   VERIFY_USER_URL = `${this.API_URL}/verify`;
-  SEND_CODE_AGAIN_URL = `${this.API_URL}/send-code-again`;
+  SEND_CODE_AGAIN_URL = `${this.VERIFY_USER_URL}/send-code-again`;
 
 
 }

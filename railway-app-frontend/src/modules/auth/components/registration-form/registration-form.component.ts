@@ -116,6 +116,7 @@ export class RegistrationFormComponent implements OnDestroy {
       this.regularUserSubscription = this.regularUserService.register(request).subscribe(
         res => {
           this.toastr.success('Registration is successful, check your email.', 'Success!')
+          //TODO HOME
         },
         err => {
           this.toastr.error(err.error, 'Error happened!')

@@ -61,7 +61,7 @@ export class VerificationPageComponent implements OnInit, OnDestroy {
       this.verificationService.verify(verifyRequest).subscribe(
         res => {
           this.toast.success('Verification successful!', 'Success!')
-          this.router.navigate(['/railway-system/auth/successfull-verification'])
+          this.router.navigate(['/railway-system/auth/successful-verification'])
         },
         err => {
           this.toast.error(err.error, 'Error happened!')
@@ -76,7 +76,7 @@ export class VerificationPageComponent implements OnInit, OnDestroy {
       .subscribe(
         res => (this.showForm = !this.showForm),
         error =>{
-          this.toast.error('Email cannot be sent.', 'Error happened!');
+          this.toast.error('Email cannot be sent. Try again later.', 'Error happened!');
         }
       );
   }
