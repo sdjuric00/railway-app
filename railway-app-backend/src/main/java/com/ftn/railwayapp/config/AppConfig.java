@@ -1,6 +1,6 @@
 package com.ftn.railwayapp.config;
 
-import com.ftn.railwayapp.service.implementation.CustomUserDetailsService;
+import com.ftn.railwayapp.service.implementation.user.CustomUserDetailsService;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -6,13 +6,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Random;
 
 
 public class Helper {
 
     private static final Random random = new Random();
+
+    public static boolean checkStartTimeAfterCurrent(LocalDateTime startTime) {
+
+        return startTime.isAfter(LocalDateTime.now());
+    }
 
     public static boolean passwordsDontMatch(String password, String confirmationPassword){
 

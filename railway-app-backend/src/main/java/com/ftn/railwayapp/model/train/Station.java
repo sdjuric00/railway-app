@@ -16,7 +16,12 @@ public class Station {
     private String id;
 
     private String name;
-    private double coordinateX;
-    private double coordinateY;
+    private String coordinateX;
+    private String coordinateY;
 
+    public Station(String name, String coordinateX, String coordinateY) {
+        this.name = name;
+        this.coordinateX = coordinateX;
+        this.coordinateY = coordinateY;
+    }
 }

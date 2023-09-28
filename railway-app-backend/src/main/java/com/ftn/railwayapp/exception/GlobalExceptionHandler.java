@@ -82,4 +82,16 @@ public class GlobalExceptionHandler {
         return IO_EXCEPTION_MESSAGE;
     }
 
+    @ExceptionHandler(value = InvalidDepartureDataException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String invalidDepartureDataException(InvalidDepartureDataException exception) {
+        return exception.getMessage();
+    }
+
+    @ExceptionHandler(value = InvalidTimeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String invalidTimeException(InvalidTimeException exception) {
+        return exception.getMessage();
+    }
+
 }

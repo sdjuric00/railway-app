@@ -1,6 +1,6 @@
 package com.ftn.railwayapp.security;
 
-import com.ftn.railwayapp.response.UserSecurityResponse;
+import com.ftn.railwayapp.response.user.UserSecurityResponse;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

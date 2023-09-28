@@ -4,8 +4,7 @@ package com.ftn.railwayapp.service.interfaces;
 import com.ftn.railwayapp.exception.*;
 import com.ftn.railwayapp.model.enums.Gender;
 import com.ftn.railwayapp.model.user.RegularUser;
-import com.ftn.railwayapp.response.LoginResponse;
-import com.ftn.railwayapp.response.UserResponse;
+import com.ftn.railwayapp.response.user.UserResponse;
 
 import java.io.IOException;
 

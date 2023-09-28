@@ -25,8 +25,7 @@ public class Departure {
     private int durationInMinutes;
     private int delayedMinutes;
     private boolean cancelled;
-    private HashMap<String, Double> prices = new HashMap<>();   //key is a station id, values i price
-    private HashMap<String, String> stations = new HashMap<>(); //key arrival time, values station id
+    private List<StationDeparture> stationDepartures = new ArrayList<>();
 
     @DBRef
     private Train train;
@@ -34,4 +33,16 @@ public class Departure {
     @DBRef
     private List<OccupiedSeats> occupiedSeats = new ArrayList<>();
 
+    public Departure(LocalDateTime startTime,
+                     int durationInMinutes,
+                     List<StationDeparture> stationDepartures,
+                     Train train
+    ) {
+        this.startTime = startTime;
+        this.durationInMinutes = durationInMinutes;
+        this.delayedMinutes = 0;
+        this.cancelled = false;
+        this.stationDepartures = stationDepartures;
+        this.train = train;
+    }
 }

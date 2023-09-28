@@ -1,5 +1,6 @@
 package com.ftn.railwayapp.model.train;
 
+import com.ftn.railwayapp.model.enums.TrainBenefits;
 import com.ftn.railwayapp.model.enums.TrainType;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -26,4 +27,12 @@ public class Train {
     @DBRef
     private List<Wagon> wagons = new ArrayList<>();
 
+    private List<TrainBenefits> trainBenefits = new ArrayList<>();
+
+    public Train(String name, TrainType type, List<Wagon> wagons, List<TrainBenefits> trainBenefits) {
+        this.name = name;
+        this.type = type;
+        this.wagons = wagons;
+        this.trainBenefits = trainBenefits;
+    }
 }

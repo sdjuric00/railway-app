@@ -13,6 +13,9 @@ public class Constants {
     public static final String LEGIT_CITY_AND_STREET_REG = "[a-zA-Z ]{1,20}";
     public static final String POSITIVE_WHOLE_NUMBER_REG = "[1-9][0-9]*";
     public static final String ZIPCODE_REG = "^\\d{5}$";
+    public static final String NOT_WHOLE_NUMBER_REG = "^[0-9.]+$";
+    public static final String TIME_PATTERN = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
+
 
     //CONSTANTS
     public static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyz";
