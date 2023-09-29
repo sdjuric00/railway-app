@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { GenderOptions } from 'src/modules/shared/model/gender';
@@ -64,7 +65,8 @@ export class RegistrationFormComponent implements OnDestroy {
   regularUserSubscription: Subscription;
 
   constructor(private toastr: ToastrService,
-              private regularUserService: RegularUserService
+              private regularUserService: RegularUserService,
+              private router: Router
   ) {
     this.hide = true
   }
@@ -116,7 +118,7 @@ export class RegistrationFormComponent implements OnDestroy {
       this.regularUserSubscription = this.regularUserService.register(request).subscribe(
         res => {
           this.toastr.success('Registration is successful, check your email.', 'Success!')
-          //TODO HOME
+          this.router.navigate(['/railway-system/auth/login'])
         },
         err => {
           this.toastr.error(err.error, 'Error happened!')

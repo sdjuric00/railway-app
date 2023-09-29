@@ -12,7 +12,10 @@ import com.ftn.railwayapp.service.interfaces.ITrainService;
 import com.ftn.railwayapp.service.interfaces.IWagonService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import static com.ftn.railwayapp.response.train.TrainResponse.fromTrain;
@@ -47,6 +50,29 @@ public class TrainService implements ITrainService {
         return fromTrain(trainRepository.save(
                 new Train(name, type, savedWagons, trainBenefits)
         ));
+    }
+
+    @Override
+    public List<Train> findTrainsByTypeAndBenefits(String trainType, String benefits) {
+        List<TrainType> trainTypes = parseToTrainType(trainType);
+
+        return benefits.equalsIgnoreCase("ALL")
+                ? this.trainRepository.findTrainsByType(trainTypes)
+                : this.trainRepository.findTrainsByTypeAndBenefits(trainTypes, Arrays.stream(benefits.split(",")).toList());
+    }
+
+    private List<TrainType> parseToTrainType(String trainType) {
+        List<TrainType> trainTypes = new ArrayList<>();
+        switch (trainType.toUpperCase(Locale.ROOT)) {
+            case "SOKO" -> trainTypes.add(TrainType.SOKO);
+            case "REGIO" -> trainTypes.add(TrainType.REGIO);
+            case "ALL" -> {
+                trainTypes.add(TrainType.SOKO);
+                trainTypes.add(TrainType.REGIO);
+            }
+        }
+
+        return trainTypes;
     }
 
     private List<Wagon> saveWagons(List<WagonRequest> wagons) {
