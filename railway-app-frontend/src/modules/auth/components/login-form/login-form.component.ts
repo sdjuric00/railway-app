@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { Subscription } from 'rxjs';
-import { LoginRequest } from 'src/modules/shared/requests/login-request';
+import { LoginRequest } from 'src/modules/shared/model/login-request';
 import { Router } from '@angular/router';
 import {
   GoogleLoginProvider,

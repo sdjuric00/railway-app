@@ -13,15 +13,28 @@ import { TrainBenefitsIconsComponent } from './components/train-benefits-icons/t
 import { DepartureDetailsPageComponent } from './pages/departure-details-page/departure-details-page.component';
 import { TrainDepartureDetailsComponent } from './components/train-departure-details/train-departure-details.component';
 import { AllStationsTableComponent } from './components/all-stations-table/all-stations-table.component';
+import { StationRowComponent } from './components/station-row/station-row.component';
+import { DepartureDetailsHeaderComponent } from './components/departure-details-header/departure-details-header.component';
+import { MapContainerComponent } from './components/map-container/map-container.component';
+import { TicketBuyButtonComponent } from "../regular-user/components/ticket-buy-button/ticket-buy-button.component";
+import { RegularModule } from "../regular-user/regular.module";
 
 
 @NgModule({
   declarations: [  
     DepartureFilteringComponent,
      DeparturesTableComponent, 
-     DeparturesTimetableComponent, TrainBenefitsIconsComponent, DepartureDetailsPageComponent, TrainDepartureDetailsComponent, AllStationsTableComponent
+     DeparturesTimetableComponent, 
+     TrainBenefitsIconsComponent, 
+     DepartureDetailsPageComponent, 
+     TrainDepartureDetailsComponent, 
+     AllStationsTableComponent, 
+     StationRowComponent, 
+     DepartureDetailsHeaderComponent, 
+     MapContainerComponent, 
   ],
   imports: [
+    RegularModule,
     CommonModule,
     HttpClientModule,
     MaterialModule,

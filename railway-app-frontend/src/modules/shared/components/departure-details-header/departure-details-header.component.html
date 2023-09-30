@@ -1,0 +1,8 @@
+<div class="header-container center-content">
+
+    <h1>{{startingStation.station.name}} <mat-icon class="inline-icon">arrow_forward</mat-icon> {{destinationStation.station.name}}</h1>
+
+    <p>Leaves at <b>{{startingStation.leavingTime}}</b> and arrives at <b>{{destinationStation.leavingTime}}</b></p>
+
+    <p>Price: <b>{{destinationStation.price - startingStation.discountIfNotStarting}}<mat-icon>payments</mat-icon></b></p>
+</div>

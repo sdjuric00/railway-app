@@ -1,0 +1,11 @@
+
+button {
+    position: absolute;
+    z-index: 999;
+    bottom: 3%;
+    right: 5%;
+
+    mat-icon {
+        transform: scale(1.5);
+    }
+}

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { StationDeparture } from '../../model/departure';
 
 @Component({
   selector: 'app-all-stations-table',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./all-stations-table.component.scss']
 })
 export class AllStationsTableComponent {
-
+  @Input() allStations: StationDeparture[]
 }

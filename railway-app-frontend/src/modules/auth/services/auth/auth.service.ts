@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginResponse, UserLoginResponse } from 'src/modules/shared/model/user';
-import { LoginRequest } from 'src/modules/shared/requests/login-request';
+import { LoginRequest } from 'src/modules/shared/model/login-request';
 import { ConfigService } from 'src/modules/shared/services/config/config.service';
 
 @Injectable({

@@ -1,1 +1,19 @@
-<p>departure-details-page works!</p>
+<div class="departure-details-container">
+
+    <div class="first-column">
+        <app-train-departure-details [numOfSoldTickets]="numOfSoldTickets"
+            [train]="departureDetails.train"
+            [totalNumOfSeats]="departureDetails.totalNumOfSeats">
+        </app-train-departure-details>
+        
+        <app-all-stations-table [allStations]="departureDetails.allStations"></app-all-stations-table>
+    </div>
+    <div class="second-column">
+        <app-departure-details-header 
+        [startingStation]="departureDetails.startingStation"
+        [destinationStation]="departureDetails.destinationStation"
+        ></app-departure-details-header>
+    </div>
+
+    <app-ticket-buy-button></app-ticket-buy-button>
+</div>

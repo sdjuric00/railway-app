@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TrainBasic } from '../../model/train';
 
 @Component({
   selector: 'app-train-departure-details',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./train-departure-details.component.scss']
 })
 export class TrainDepartureDetailsComponent {
+  @Input() train: TrainBasic
+  @Input() numOfSoldTickets: number
+  @Input() totalNumOfSeats: number
 
 }

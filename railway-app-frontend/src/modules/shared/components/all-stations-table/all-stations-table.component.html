@@ -1,1 +1,8 @@
-<p>all-stations-table works!</p>
+<div class="all-stations-container">
+    <h1>Stations schedule</h1>
+
+    <div *ngFor="let station of allStations">
+        <app-station-row [stationDeparture]="station"></app-station-row>
+    </div>
+
+</div>

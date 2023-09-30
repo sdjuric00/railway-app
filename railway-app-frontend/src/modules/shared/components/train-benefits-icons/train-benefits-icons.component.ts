@@ -5,10 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './train-benefits-icons.component.html',
   styleUrls: ['./train-benefits-icons.component.scss']
 })
-export class TrainBenefitsIconsComponent implements OnInit {
+export class TrainBenefitsIconsComponent {
   @Input() benefits: string[] = []
 
-  ngOnInit(): void {
-      console.log(this.benefits)
-  }
 }

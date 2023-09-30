@@ -41,4 +41,15 @@ export class ConfigService {
     + `&time=${searchRequest.time}`
   }
 
+  getDepartureDetailsURL(departureId: string, startingStationId: string, destinationStationId: string): string {
+    return `${this.DEPARTURE_URL}/${departureId}/${startingStationId}/${destinationStationId}`
+  }
+
+  ///////////TICKET///////////
+  TICKET_URL = `${this.API_URL}/ticket`
+
+  getNumOfSoldTicketsURL(departureId: string): string {
+    return `${this.TICKET_URL}/sold/${departureId}`
+  }
+
 }

@@ -1,1 +1,10 @@
-<p>train-departure-details works!</p>
+<div class="train-container">
+    <h1>{{train.name}} <span class="availability">Occupied: {{numOfSoldTickets}}/{{totalNumOfSeats}}</span></h1>
+
+    <div class="badges">
+        <img *ngIf="train.type === 'REGIO'" src="https://w3.srbvoz.rs/redvoznje/Content/img/RE.jpg" title="REGIO VOZ">
+        <img  *ngIf="train.type === 'SOKO'" src="https://w3.srbvoz.rs/redvoznje/Content/img/soko.svg" title="INTER CITY">
+        <app-train-benefits-icons [benefits]="train.trainBenefits"></app-train-benefits-icons>
+    </div>
+
+</div>

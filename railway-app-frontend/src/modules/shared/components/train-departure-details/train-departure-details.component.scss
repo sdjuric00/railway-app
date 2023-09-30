@@ -1,0 +1,28 @@
+
+.train-container {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    position: relative;
+
+    img {
+        width: 1.5rem;
+        height: auto;
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .badges {
+        display: flex; 
+        vertical-align: middle;
+    }
+
+    .availability {
+        font-size: 1.2rem;
+        position: absolute;
+        right: 5%;
+    }
+}

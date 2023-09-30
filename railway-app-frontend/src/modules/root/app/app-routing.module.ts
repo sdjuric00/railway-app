@@ -17,6 +17,11 @@ const routes: Routes = [
         loadChildren: () => 
           import("./../../shared/shared.module").then((m) => m.SharedModule)
       },
+      {
+        path: "regular",
+        loadChildren: () => 
+          import("./../../regular-user/regular.module").then((m) => m.RegularModule)
+      },
     ],
   },
   {
