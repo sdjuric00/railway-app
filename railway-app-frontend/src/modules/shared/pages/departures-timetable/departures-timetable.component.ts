@@ -3,6 +3,8 @@ import { SearchRequest } from '../../model/search';
 import { DeparturesService } from '../../services/departures/departures.service';
 import { Subscription } from 'rxjs';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { Departure } from '../../model/departure';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-departures-timetable',
@@ -12,14 +14,15 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 export class DeparturesTimetableComponent implements OnDestroy {
   page: number = 0
   pageSize: number = 5
-  dataSource: any[] = []
+  dataSource: Departure[] = []
   searchRequest: SearchRequest
   totalElements: number
 
   searchSubscription: Subscription
 
   constructor(private departureService: DeparturesService,
-              private toast: ToastrService
+              private toast: ToastrService,
+              private router: Router
   ) {}
 
   pageChanged(event: any) {
@@ -44,12 +47,15 @@ export class DeparturesTimetableComponent implements OnDestroy {
       res => {
         this.dataSource = res.content
         this.totalElements = res.totalElements
-        console.log(this.dataSource)
       },
       error => {
         this.toast.error(error.error, 'Error happened!')
       }
     )
+  }
+
+  goToDetails(element: Departure): void {
+      this.router.navigate([`/railway-system/shared/departure-details/${element.id}/${this.searchRequest.startingStationId}/${this.searchRequest.destinationStationId}`])
   }
 
   ngOnDestroy(): void {

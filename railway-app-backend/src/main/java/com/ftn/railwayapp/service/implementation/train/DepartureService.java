@@ -9,6 +9,7 @@ import com.ftn.railwayapp.model.train.StationDeparture;
 import com.ftn.railwayapp.model.train.Train;
 import com.ftn.railwayapp.repository.train.DepartureRepository;
 import com.ftn.railwayapp.request.train.StationDepartureRequest;
+import com.ftn.railwayapp.response.train.DepartureDetailsResponse;
 import com.ftn.railwayapp.response.train.DepartureResponse;
 import com.ftn.railwayapp.response.train.DepartureSearchResponse;
 import com.ftn.railwayapp.service.interfaces.IDepartureService;
@@ -44,6 +45,13 @@ public class DepartureService implements IDepartureService {
     }
 
     @Override
+    public Departure getById(String id) throws EntityNotFoundException {
+
+        return this.departureRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("departure"));
+    }
+
+    @Override
     public Page<DepartureSearchResponse> departuresTimetable(int page,
                                                        int pageSize,
                                                        String trainType,
@@ -64,6 +72,17 @@ public class DepartureService implements IDepartureService {
     }
 
     @Override
+    public DepartureDetailsResponse getDepartureDetails(String departureId, String startingStationId, String destinationStationId) throws EntityNotFoundException, OperationCannotBeCompletedException {
+        Departure departure = this.getById(departureId);
+        int totalNumOfSeats = this.trainService.getTotalNumOfSeats(departure.getTrain().getId());
+        StationDeparture startingStationDeparture = getStationDepartureFromDeparture(departure, startingStationId);
+        StationDeparture destinationStationDeparture = getStationDepartureFromDeparture(departure, destinationStationId);
+        checkStationsOrder(startingStationDeparture.getStationOrder(), destinationStationDeparture.getStationOrder());
+
+        return DepartureDetailsResponse.fromDeparture(departure, startingStationDeparture, destinationStationDeparture, totalNumOfSeats);
+    }
+
+    @Override
     public DepartureResponse createDeparture(LocalDateTime startTime,
                                              int durationInMinutes,
                                              List<StationDepartureRequest> stationDepartures,
@@ -78,6 +97,16 @@ public class DepartureService implements IDepartureService {
                   startTime, durationInMinutes, createStationDepartures(stationDepartures), this.trainService.getTrainById(trainId)
           ))
         );
+    }
+
+    private StationDeparture getStationDepartureFromDeparture(Departure departure, String stationId) throws OperationCannotBeCompletedException {
+        for (StationDeparture stationDeparture : departure.getStationDepartures()) {
+            if (stationDeparture.getStation().getId().equals(stationId)) {
+                return stationDeparture;
+            }
+        }
+
+        throw new OperationCannotBeCompletedException("Station is not valid.");
     }
 
     private List<StationDeparture> createStationDepartures(List<StationDepartureRequest> stationDeparturesReq) throws EntityNotFoundException, InvalidDepartureDataException {
@@ -96,6 +125,12 @@ public class DepartureService implements IDepartureService {
         }
 
         return stationDepartures;
+    }
+
+    private void checkStationsOrder(int startingStationOrder, int destinationStationOrder) throws OperationCannotBeCompletedException {
+        if (startingStationOrder >= destinationStationOrder) {
+            throw new OperationCannotBeCompletedException("Station is not valid.");
+        }
     }
 
     private void checkStationDepartureValidity(StationDepartureRequest stationDepartureRequest) throws InvalidDepartureDataException {

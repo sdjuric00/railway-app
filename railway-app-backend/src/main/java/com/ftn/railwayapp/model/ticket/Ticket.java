@@ -28,6 +28,12 @@ public class Ticket {
     private String departureId;
 
     @Column(nullable = false)
+    private String startStationId;
+
+    @Column(nullable = false)
+    private String destinationStationId;
+
+    @Column(nullable = false)
     private String additionalUsers;
 
     @Column(nullable = false)
@@ -35,8 +41,5 @@ public class Ticket {
 
     @Column(nullable = false)
     private String qrCode;
-
-    @OneToMany(mappedBy = "ticket", fetch = FetchType.EAGER)
-    private List<ReservedSeats> reservedSeats = new ArrayList<>();
 
 }

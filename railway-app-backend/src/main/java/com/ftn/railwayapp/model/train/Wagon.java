@@ -20,23 +20,17 @@ public class Wagon {
     private int numberOfRows;
     private int totalNumOfSeats;
     private boolean seatsWithTables;
-    private double seatReservationPrice;
-    private boolean vipSection;
 
     public Wagon(int wagonNum,
                  int seatsPerRow,
                  int numberOfRows,
                  int totalNumOfSeats,
-                 boolean seatsWithTables,
-                 double seatReservationPrice,
-                 boolean vipSection
+                 boolean seatsWithTables
     ) {
         this.wagonNum = wagonNum;
         this.seatsPerRow = seatsPerRow;
         this.numberOfRows = numberOfRows;
         this.totalNumOfSeats = totalNumOfSeats;
         this.seatsWithTables = seatsWithTables;
-        this.seatReservationPrice = seatReservationPrice;
-        this.vipSection = vipSection;
     }
 }

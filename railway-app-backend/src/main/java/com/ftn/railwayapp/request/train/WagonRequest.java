@@ -26,12 +26,6 @@ public class WagonRequest {
     @NotNull(message = WRONG_BOOLEAN_VALUE_WAGON)
     private final boolean seatsWithTables;
 
-    @Positive(message = WRONG_NEGATIVE_NUMBER_TRAIN)
-    private final double seatReservationPrice;
-
-    @NotNull(message = WRONG_BOOLEAN_VALUE_WAGON)
-    private final boolean vipSection;
-
     public int getTotalNumOfSeats() {
         return this.numberOfRows * this.seatsPerRow;
     }

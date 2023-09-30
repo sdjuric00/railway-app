@@ -10,7 +10,9 @@
         [page]="page" 
         [pageSize]="pageSize"
         [totalElements]="totalElements"
-        [dataSource]="dataSource"></app-departures-table>
+        [dataSource]="dataSource"
+        (goToDetailsPageEvent)="goToDetails($event)">
+    </app-departures-table>
     </div>
 
 </div>

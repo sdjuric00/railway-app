@@ -15,7 +15,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="railway-app" value="74a161bc-3468-4d9a-8310-9ba194986409" />
+          <factory-entry name="railway-app" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

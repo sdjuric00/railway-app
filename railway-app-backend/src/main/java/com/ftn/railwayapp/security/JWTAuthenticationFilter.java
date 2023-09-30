@@ -61,7 +61,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private Authentication getUsernamePasswordAuthentication(HttpServletRequest request) throws EntityNotFoundException, InvalidJWTException, InvalidCredentialsException {
         DecodedJWT jwt = JWTUtils.extractJWTFromRequest(request);
         User user = userService.getVerifiedUser(JWTUtils.extractEmailFromJWT(jwt));
-        if (user.isSocialAccount()) { throw new InvalidCredentialsException();}
 
         return getSpringAuthToken(user);
     }

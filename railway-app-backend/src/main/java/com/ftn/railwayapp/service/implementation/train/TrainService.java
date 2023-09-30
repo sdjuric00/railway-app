@@ -58,6 +58,18 @@ public class TrainService implements ITrainService {
         return this.trainRepository.findTrainsByType(trainTypes);
     }
 
+    @Override
+    public int getTotalNumOfSeats(String trainId) throws EntityNotFoundException {
+        Train train = getTrainById(trainId);
+        int totalNumOfSeats = 0;
+
+        for (Wagon wagon : train.getWagons()) {
+            totalNumOfSeats += wagon.getTotalNumOfSeats();
+        }
+
+        return totalNumOfSeats;
+    }
+
     private List<TrainType> parseToTrainType(String trainType) {
         List<TrainType> trainTypes = new ArrayList<>();
         switch (trainType.toUpperCase(Locale.ROOT)) {

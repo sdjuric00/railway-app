@@ -22,9 +22,7 @@ public class WagonService implements IWagonService {
                 wagonRequest.getSeatsPerRow(),
                 wagonRequest.getNumberOfRows(),
                 wagonRequest.getTotalNumOfSeats(),
-                wagonRequest.isSeatsWithTables(),
-                wagonRequest.getSeatReservationPrice(),
-                wagonRequest.isVipSection()
+                wagonRequest.isSeatsWithTables()
         ));
     }
 

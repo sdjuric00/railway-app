@@ -5,6 +5,7 @@ import com.ftn.railwayapp.exception.InvalidDepartureDataException;
 import com.ftn.railwayapp.exception.InvalidTimeException;
 import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
 import com.ftn.railwayapp.request.train.DepartureRequest;
+import com.ftn.railwayapp.response.train.DepartureDetailsResponse;
 import com.ftn.railwayapp.response.train.DepartureResponse;
 import com.ftn.railwayapp.response.train.DepartureSearchResponse;
 import com.ftn.railwayapp.service.interfaces.IDepartureService;
@@ -33,6 +34,18 @@ public class DepartureController {
         this.departureService = departureService;
     }
 
+    @GetMapping("{departureId}/{startingStationId}/{destinationStationId}")
+    @ResponseStatus(HttpStatus.OK)
+    public DepartureDetailsResponse getDepartureDetails(
+            @PathVariable @NotBlank String departureId,
+            @PathVariable @NotBlank String startingStationId,
+            @PathVariable @NotBlank String destinationStationId
+    ) throws OperationCannotBeCompletedException, EntityNotFoundException {
+
+        return departureService.getDepartureDetails(
+                departureId, startingStationId, destinationStationId
+        );
+    }
 
     @GetMapping("timetable")
     @ResponseStatus(HttpStatus.OK)

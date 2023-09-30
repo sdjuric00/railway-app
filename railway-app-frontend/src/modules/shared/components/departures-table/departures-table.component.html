@@ -40,7 +40,7 @@
         <ng-container matColumnDef="details">
             <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
             <mat-cell *matCellDef="let element"> 
-                <button color="primary" mat-raised-button>Details</button>    
+                <button color="primary" (click)="goToDetailsPage(element)" mat-raised-button>Details</button>    
             </mat-cell>
         </ng-container>
     
