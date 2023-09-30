@@ -94,4 +94,10 @@ public class GlobalExceptionHandler {
         return exception.getMessage();
     }
 
+    @ExceptionHandler(value = OperationCannotBeCompletedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String operationCannotBeCompletedException(OperationCannotBeCompletedException exception) {
+        return exception.getMessage();
+    }
+
 }

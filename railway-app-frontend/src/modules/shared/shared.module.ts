@@ -7,17 +7,26 @@ import { DepartureFilteringComponent } from './components/departure-filtering/de
 import { DeparturesTableComponent } from './components/departures-table/departures-table.component';
 import { DepartureRowComponent } from './components/departure-row/departure-row.component';
 import { DeparturesTimetableComponent } from './pages/departures-timetable/departures-timetable.component';
+import { RouterModule } from "@angular/router";
+import { SharedRoutes } from "./shared.routes";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { TrainBenefitsIconsComponent } from './components/train-benefits-icons/train-benefits-icons.component';
 
 
 @NgModule({
   declarations: [  
-  
-    DepartureFilteringComponent, DeparturesTableComponent, DepartureRowComponent, DeparturesTimetableComponent
+    DepartureFilteringComponent,
+     DeparturesTableComponent, 
+     DepartureRowComponent, 
+     DeparturesTimetableComponent, TrainBenefitsIconsComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule.forChild(SharedRoutes)
   ],
   exports: [
   ],

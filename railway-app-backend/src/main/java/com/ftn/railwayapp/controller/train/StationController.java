@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("station")
 @Validated
@@ -18,6 +20,14 @@ public class StationController {
 
     public StationController(IStationService stationService) {
         this.stationService = stationService;
+    }
+
+    @GetMapping("get-all")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_REGULAR')")
+    public List<StationResponse> getAll() {
+
+        return this.stationService.getAll();
     }
 
     @PostMapping

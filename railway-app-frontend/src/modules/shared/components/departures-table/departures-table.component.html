@@ -1,1 +1,66 @@
-<p>departures-table works!</p>
+<div class="table-container">
+    <mat-table *ngIf="dataSource.length > 0; else noContentBlock" [dataSource]="dataSource">
+        <ng-container matColumnDef="trainName">
+            <mat-header-cell *matHeaderCellDef> Train name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.trainName }} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="startTime">
+            <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.startTime.split('T')[0] }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="leavingTime">
+            <mat-header-cell *matHeaderCellDef> Leaving time </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.leavingTime }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="arrivalTime">
+            <mat-header-cell *matHeaderCellDef> Arrival time </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.arrivalTime }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delayed">
+            <mat-header-cell *matHeaderCellDef> Delayed </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.delayed > 0 ? element.delayed + 'min' : 'On time' }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cancelled">
+            <mat-header-cell *matHeaderCellDef> Cancelled </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.cancelled ? 'Yes' : 'No' }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="trainBenefits">
+            <mat-header-cell *matHeaderCellDef> Offers </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <app-train-benefits-icons [benefits]="element.trainBenefits"></app-train-benefits-icons>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="details">
+            <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+                <button color="primary" mat-raised-button>Details</button>    
+            </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator *ngIf="dataSource.length > 0"
+    [length]="totalElements"
+    [pageSizeOptions]="[5, 10]" 
+    [pageSize]="pageSize"
+    [pageIndex]="page"
+    (page)="onPageChange($event)">
+    </mat-paginator>
+
+    <ng-template #noContentBlock>
+        <div class="no-content-template center-content">
+            <h1>Serbian Railways</h1>
+            <h2>We make sure that you arrive on time!</h2>
+            <h2>Check your departures here. Thanks for travelling with us!</h2>
+            <img src="./../../../../../assets/images/train-blue-small.png" width="100px" alt="Train" class="app-icon" />
+        </div>
+    </ng-template>
+</div>

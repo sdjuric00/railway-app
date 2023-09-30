@@ -4,13 +4,13 @@ import com.ftn.railwayapp.exception.EntityNotFoundException;
 import com.ftn.railwayapp.exception.InvalidDepartureDataException;
 import com.ftn.railwayapp.exception.InvalidTimeException;
 import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
-import com.ftn.railwayapp.model.enums.TrainBenefits;
 import com.ftn.railwayapp.model.train.Departure;
 import com.ftn.railwayapp.model.train.StationDeparture;
 import com.ftn.railwayapp.model.train.Train;
 import com.ftn.railwayapp.repository.train.DepartureRepository;
 import com.ftn.railwayapp.request.train.StationDepartureRequest;
 import com.ftn.railwayapp.response.train.DepartureResponse;
+import com.ftn.railwayapp.response.train.DepartureSearchResponse;
 import com.ftn.railwayapp.service.interfaces.IDepartureService;
 import com.ftn.railwayapp.service.interfaces.IStationService;
 import com.ftn.railwayapp.service.interfaces.ITrainService;
@@ -20,10 +20,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 import static com.ftn.railwayapp.util.Helper.checkStartTimeAfterCurrent;
 
@@ -46,24 +44,23 @@ public class DepartureService implements IDepartureService {
     }
 
     @Override
-    public Page<DepartureResponse> departuresTimetable(int page,
+    public Page<DepartureSearchResponse> departuresTimetable(int page,
                                                        int pageSize,
                                                        String trainType,
                                                        String startingStationId,
                                                        String destinationStationId,
-                                                       LocalDateTime startTime,
-                                                       String benefits
+                                                       LocalDateTime startTime
     ) throws OperationCannotBeCompletedException {
-        checkFilteringParameters(trainType, startTime, benefits);
+        checkFilteringParameters(trainType, startTime);
 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("startTime").ascending());
         LocalDateTime endOfDay = LocalDateTime.now().with(LocalTime.MAX);
-        List<String> validTrainsIDs = this.trainService.findTrainsByTypeAndBenefits(trainType, benefits)
+        List<String> validTrainsIDs = this.trainService.findTrainsByType(trainType)
                 .stream().map(Train::getId).toList();
 
-        Page<Departure> departuresRegardlessOfStations = this.departureRepository.filterDeparturesRegardlessOfBenefits(startTime, endOfDay, validTrainsIDs, pageable);
+        Page<Departure> departures = this.departureRepository.filterDepartures(startTime, endOfDay, validTrainsIDs, pageable);
 
-        return filterStations(departuresRegardlessOfStations, startingStationId, destinationStationId, pageable);
+        return filterStations(departures, startingStationId, destinationStationId, departures.getTotalElements(), pageable);
     }
 
     @Override
@@ -112,10 +109,10 @@ public class DepartureService implements IDepartureService {
         }
     }
 
-    private void checkFilteringParameters(String trainType, LocalDateTime time, String benefits)
+    private void checkFilteringParameters(String trainType, LocalDateTime time)
             throws OperationCannotBeCompletedException
     {
-        if (isTrainTypeInvalid(trainType) || isFilteringTimeInvalid(time) || areBenefitsInvalid(benefits)) {
+        if (isTrainTypeInvalid(trainType) || isFilteringTimeInvalid(time)) {
             throw new OperationCannotBeCompletedException("Filtering data is invalid.");
         }
     }
@@ -131,25 +128,14 @@ public class DepartureService implements IDepartureService {
         return time.isBefore(LocalDateTime.now().minusDays(1));
     }
 
-    private boolean areBenefitsInvalid(String benefits) {
-        if (benefits.equalsIgnoreCase("ALL")) return false;
-        try {
-            String[] benefitsArray = benefits.split(",");
-            Arrays.stream(benefitsArray).map(TrainBenefits::valueOf);
-        } catch (IllegalArgumentException exception) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private Page<DepartureResponse> filterStations(Page<Departure> departuresRegardlessOfStations,
+    private Page<DepartureSearchResponse> filterStations(Page<Departure> departuresRegardlessOfStations,
                                                    String startingStationId,
                                                    String destinationStationId,
+                                                   long totalElements,
                                                    Pageable pageable
     ) {
         List<Departure> departures = new ArrayList<>(departuresRegardlessOfStations.getContent());
-        List<DepartureResponse> filteredDepartures = new ArrayList<>();
+        List<DepartureSearchResponse> filteredDepartures = new ArrayList<>();
 
         for (Departure departure : departures) {
             boolean foundStarting = false;
@@ -163,11 +149,11 @@ public class DepartureService implements IDepartureService {
             }
 
             if (foundStarting && foundDestination) {
-                filteredDepartures.add(DepartureResponse.fromDeparture(departure));
-            }
+                filteredDepartures.add(DepartureSearchResponse.fromDeparture(departure, startingStationId, destinationStationId));
+            } else { totalElements = totalElements - 1; }
         }
 
-        return new PageImpl<DepartureResponse>(filteredDepartures, pageable, departures.size());
+        return new PageImpl<DepartureSearchResponse>(filteredDepartures, pageable, totalElements);
     }
 
 }

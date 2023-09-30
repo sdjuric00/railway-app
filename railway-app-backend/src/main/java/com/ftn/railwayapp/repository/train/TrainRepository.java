@@ -11,9 +11,6 @@ import java.util.List;
 @Repository
 public interface TrainRepository extends MongoRepository<Train, String> {
 
-    @Query("{'type': {$in: ?0}, 'trainBenefits': {$in: ?1} }")
-    List<Train> findTrainsByTypeAndBenefits(List<TrainType> types, List<String> benefits);
-
     @Query("{'type': {$in: ?0} }")
     List<Train> findTrainsByType(List<TrainType> types);
 }

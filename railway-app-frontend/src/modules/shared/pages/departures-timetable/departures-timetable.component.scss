@@ -1,0 +1,20 @@
+
+.departures-timetable-container {
+
+    display: flex;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .table-column {
+        width: 75%;
+    }
+
+    .filtering-column {
+        padding: 1.5rem;
+        width: 25%;
+        background-color: var(--light-slate);
+        height: calc(100vh - 7rem);
+    }
+
+}

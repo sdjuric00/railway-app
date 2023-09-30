@@ -14,5 +14,5 @@ import java.util.List;
 public interface DepartureRepository extends MongoRepository<Departure, String> {
 
     @Query("{ 'startTime': { $gte: ?0, $lte: ?1 }, 'train': {$in: ?2}}")
-    Page<Departure> filterDeparturesRegardlessOfBenefits(LocalDateTime startTime, LocalDateTime endTime, List<String> trainIDs, Pageable pageable);
+    Page<Departure> filterDepartures(LocalDateTime startTime, LocalDateTime endTime, List<String> trainIDs, Pageable pageable);
 }

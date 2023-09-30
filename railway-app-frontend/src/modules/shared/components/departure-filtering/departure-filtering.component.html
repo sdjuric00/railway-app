@@ -1,1 +1,82 @@
-<p>departure-filtering works!</p>
+<div>
+
+    <h1>Timetable for {{formattedDate}}</h1>
+
+    <form color="primary" [formGroup]="filteringForm">
+
+        <div>
+            <span>
+                FROM&nbsp;
+            </span>
+            <mat-form-field class="example-full-width">
+                <mat-label>Starting station</mat-label>
+                <input type="text" placeholder="Starting station" matInput formControlName="startingStation"
+                    [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let station of filteredStations | async" [value]="station.name"
+                        (click)="changedStartingStation(station)">
+                        {{station.name}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="filteringForm.get('startingStation')?.hasError('required')">
+                    Start station is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <span>TO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <mat-form-field class="example-full-width">
+                <mat-label>Destination station</mat-label>
+                <input type="text" placeholder="Destination station" matInput formControlName="destinationStation"
+                    [matAutocomplete]="auto2">
+                <mat-autocomplete #auto2="matAutocomplete">
+                    <mat-option *ngFor="let station of filteredStations | async" [value]="station.name"
+                    (click)="changedDestinationStation(station)">
+                        {{station.name}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="filteringForm.get('destinationStation')?.hasError('required')">
+                    Destination station is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="date-time-pickers">
+            <mat-icon>calendar_month</mat-icon>&nbsp;
+            <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput formControlName="date" [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="time-picker" appearance="fill">
+                <mat-label>Time</mat-label>
+                <input matInput formControlName="time" type="text" name="time" />
+                <mat-error *ngIf="filteringForm.get('time')?.hasError('required')
+                || filteringForm.get('time')?.hasError('pattern')">
+                    Time is <strong>required</strong>(HH:mm)
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <h2>Select train type</h2>
+            <mat-radio-group formControlName="trainType" color="primary">
+                <mat-radio-button value="ALL">ALL</mat-radio-button>
+                <mat-radio-button value="SOKO">SOKO</mat-radio-button>
+                <mat-radio-button value="REGIO">REGIO</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div class="center-content">
+            <button class="search-btn" mat-raised-button color="primary" (click)="search()">Search</button>
+        </div>
+
+    </form>
+
+</div>

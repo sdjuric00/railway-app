@@ -7,6 +7,8 @@ import com.ftn.railwayapp.response.train.StationResponse;
 import com.ftn.railwayapp.service.interfaces.IStationService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.ftn.railwayapp.response.train.StationResponse.fromStation;
 
 @Service
@@ -16,6 +18,13 @@ public class StationService implements IStationService {
 
     public StationService(StationRepository stationRepository) {
         this.stationRepository = stationRepository;
+    }
+
+    @Override
+    public List<StationResponse> getAll() {
+        List<Station> stations = this.stationRepository.findAll();
+
+        return stations.stream().map(StationResponse::fromStation).toList();
     }
 
     @Override
@@ -31,4 +40,5 @@ public class StationService implements IStationService {
 
         return stationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("station"));
     }
+
 }

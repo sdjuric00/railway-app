@@ -6,6 +6,7 @@ import com.ftn.railwayapp.exception.InvalidTimeException;
 import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
 import com.ftn.railwayapp.request.train.StationDepartureRequest;
 import com.ftn.railwayapp.response.train.DepartureResponse;
+import com.ftn.railwayapp.response.train.DepartureSearchResponse;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
@@ -16,5 +17,5 @@ public interface IDepartureService {
                                       List<StationDepartureRequest> stationDepartures, String trainId)
             throws InvalidTimeException, EntityNotFoundException, InvalidDepartureDataException;
 
-    Page<DepartureResponse> departuresTimetable(int page, int pageSize, String trainType, String startingStationId, String destinationStationId, LocalDateTime time, String benefits) throws OperationCannotBeCompletedException;
+    Page<DepartureSearchResponse> departuresTimetable(int page, int pageSize, String trainType, String startingStationId, String destinationStationId, LocalDateTime time) throws OperationCannotBeCompletedException;
 }

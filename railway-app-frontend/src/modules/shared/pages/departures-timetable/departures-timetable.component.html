@@ -1,1 +1,16 @@
-<p>departures-timetable works!</p>
+<div class="departures-timetable-container">
+    
+    <div class="filtering-column">
+        <app-departure-filtering (searchEvent)="search($event)" 
+        ></app-departure-filtering>
+    </div>
+
+    <div class="table-column">
+        <app-departures-table (pageChangedEvent)="pageChanged($event)" 
+        [page]="page" 
+        [pageSize]="pageSize"
+        [totalElements]="totalElements"
+        [dataSource]="dataSource"></app-departures-table>
+    </div>
+
+</div>

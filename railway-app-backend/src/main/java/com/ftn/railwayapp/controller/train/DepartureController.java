@@ -6,6 +6,7 @@ import com.ftn.railwayapp.exception.InvalidTimeException;
 import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
 import com.ftn.railwayapp.request.train.DepartureRequest;
 import com.ftn.railwayapp.response.train.DepartureResponse;
+import com.ftn.railwayapp.response.train.DepartureSearchResponse;
 import com.ftn.railwayapp.service.interfaces.IDepartureService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -20,7 +21,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("departure")
@@ -37,18 +37,17 @@ public class DepartureController {
     @GetMapping("timetable")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_REGULAR')")
-    public Page<DepartureResponse> departuresTimetable(
+    public Page<DepartureSearchResponse> departuresTimetable(
             @RequestParam("page") @Min(0) int page,
             @RequestParam("pageSize") @Min(5) @Max(10) int pageSize,
             @RequestParam("trainType") @NotBlank String trainType,
             @RequestParam("startingStation") @NotBlank String startingStationId,
             @RequestParam("destinationStation") @NotBlank String destinationStationId,
-            @RequestParam("time") @NotNull @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime time,
-            @RequestParam("benefits") @NotBlank String benefits
+            @RequestParam("time") @NotNull @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime time
     ) throws OperationCannotBeCompletedException {
 
         return departureService.departuresTimetable(
-                page, pageSize, trainType, startingStationId, destinationStationId, time, benefits
+                page, pageSize, trainType.trim(), startingStationId.trim(), destinationStationId.trim(), time
         );
     }
 

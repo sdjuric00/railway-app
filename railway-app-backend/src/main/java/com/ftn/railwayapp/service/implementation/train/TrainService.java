@@ -13,7 +13,6 @@ import com.ftn.railwayapp.service.interfaces.IWagonService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -53,12 +52,10 @@ public class TrainService implements ITrainService {
     }
 
     @Override
-    public List<Train> findTrainsByTypeAndBenefits(String trainType, String benefits) {
+    public List<Train> findTrainsByType(String trainType) {
         List<TrainType> trainTypes = parseToTrainType(trainType);
 
-        return benefits.equalsIgnoreCase("ALL")
-                ? this.trainRepository.findTrainsByType(trainTypes)
-                : this.trainRepository.findTrainsByTypeAndBenefits(trainTypes, Arrays.stream(benefits.split(",")).toList());
+        return this.trainRepository.findTrainsByType(trainTypes);
     }
 
     private List<TrainType> parseToTrainType(String trainType) {

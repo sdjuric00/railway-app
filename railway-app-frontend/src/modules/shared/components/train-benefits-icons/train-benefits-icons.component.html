@@ -1,0 +1,10 @@
+<div style="display: flex;">
+    <div  *ngFor="let benefit of benefits;">
+        <mat-icon color="primary" *ngIf="benefit==='CHARGERS'">battery_charging_full</mat-icon>
+        <mat-icon color="primary" *ngIf="benefit==='BABY_SEAT'">baby_changing_station</mat-icon>
+        <mat-icon color="primary" *ngIf="benefit==='BICYCLE_STORAGE'">pedal_bike</mat-icon>
+        <mat-icon color="primary" *ngIf="benefit==='INVALIDITY_AVAILABLE'">accessible</mat-icon>
+        <mat-icon color="primary" *ngIf="benefit==='WI_FI'">wifi</mat-icon>
+        <mat-icon color="primary" *ngIf="benefit==='TOILET'">wash</mat-icon>
+    </div>
+</div>
