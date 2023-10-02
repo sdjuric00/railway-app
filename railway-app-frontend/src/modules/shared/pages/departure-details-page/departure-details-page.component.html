@@ -21,5 +21,9 @@
     </app-map-container>
     </div>
 
-    <app-ticket-buy-button></app-ticket-buy-button>
+    <app-ticket-buy-button *ngIf="loggedUser && isRegular"
+    [departureId]="departureDetails.id" 
+    [destinationStation]="departureDetails.destinationStation"
+    [startingStation]="departureDetails.startingStation"
+    ></app-ticket-buy-button>
 </div>

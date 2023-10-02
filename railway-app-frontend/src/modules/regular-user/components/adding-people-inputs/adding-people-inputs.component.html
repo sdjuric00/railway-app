@@ -1,0 +1,32 @@
+<div class="adding-people-inputs-container">
+    <form [formGroup]="ticketRequestForm" (ngSubmit)="onSubmit()">
+        
+        <mat-form-field style="margin-left: 0;">
+            <mat-label>Passenger Full Name</mat-label>
+            <input matInput type="text" formControlName="fullName">
+            <mat-error>
+                This field is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-icon (click)="addPerson()">add_circle</mat-icon>
+
+        <div formArrayName="numOfPeople">
+            <div *ngFor="let person of numOfPeople().controls; let i = index" [formGroupName]="i">
+                <mat-form-field>
+                    <mat-label>Passenger Full Name</mat-label>
+                    <input matInput type="text" formControlName="fullName">
+                    <mat-error>
+                        This field is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-icon (click)="removePerson(i)">do_not_disturb_on</mat-icon>
+            </div>
+        </div>
+        
+        <button type="submit" mat-raised-button color="primary">
+            Calculate <mat-icon>calculate</mat-icon>
+        </button>
+    </form>
+</div>

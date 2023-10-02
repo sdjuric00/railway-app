@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { DepartureDetails } from '../../model/departure';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UserLoginResponse } from '../../model/user';
+import { AuthService } from 'src/modules/auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-departure-details-page',
@@ -12,7 +14,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./departure-details-page.component.scss']
 })
 export class DepartureDetailsPageComponent implements OnInit, OnDestroy {
-
+  loggedUser: UserLoginResponse | null = null
+  isRegular: boolean = false
+  authSubscription: Subscription
   departureSubscription: Subscription
   ticketSubscription: Subscription
 
@@ -26,7 +30,8 @@ export class DepartureDetailsPageComponent implements OnInit, OnDestroy {
   constructor(private departureService: DeparturesService,
               private ticketService: TicketService,
               private route: ActivatedRoute,
-              private toast: ToastrService
+              private toast: ToastrService,
+              private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +43,20 @@ export class DepartureDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   loadData(): void {
+    this.loadLoggedUser()
     this.loadDepartureData()
+    this.loadSoldTickets()
+  }
+
+  loadLoggedUser(): void {
+    this.authSubscription = this.authService.getSubjectCurrentUser().subscribe(
+      res => {
+        if (res) {
+          this.loggedUser = res
+          this.isRegular = res.role.roleName === 'ROLE_REGULAR'
+        }
+      }
+    )
   }
 
   loadSoldTickets(): void {

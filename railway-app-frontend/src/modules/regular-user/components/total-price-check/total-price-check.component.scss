@@ -1,0 +1,22 @@
+
+.total-container {
+    font-weight: bold;
+    margin: 3rem 5rem 0 5rem;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 1.4rem;
+    }
+
+    p.equals {
+        font-size: 2rem !important;
+    }
+
+    hr {
+        border-color: var(--lightest-navy);
+    }
+}

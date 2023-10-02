@@ -1,0 +1,31 @@
+<div *ngIf="data" class="center-content dialog-container">
+
+    <h1>{{data.startingStation.station.name}} <mat-icon class="inline-icon">arrow_forward</mat-icon>
+        {{data.destinationStation.station.name}}</h1>
+    
+    <p>Leaves at <b>{{data.startingStation.leavingTime}}</b> and arrives at <b>{{data.destinationStation.leavingTime}}</b></p>
+    
+    <p>Price per person: <b>{{pricePerPerson}}<mat-icon>payments</mat-icon></b></p>
+    
+    <div style="display: flex;" class="dialog-content">
+        <div style="flex: 1;">
+            <app-adding-people-inputs (addedPassengersEvent)="addedPassengers($event)"></app-adding-people-inputs>
+        </div>
+        <div style="flex: 1;">
+            <app-total-price-check
+            [pricePerPerson]="pricePerPerson"
+            [numOfPeople]="passengers.length"
+            ></app-total-price-check>
+
+            <button color="primary" class="cancel-button" mat-button [mat-dialog-close]="null">Cancel</button>
+            <button color="primary" 
+                class="buy-button" 
+                mat-raised-button 
+                [disabled]="this.passengers.length <= 0" 
+                [mat-dialog-close]="null" 
+                (click)="buyTicket()"
+                >Buy
+            </button>
+        </div>
+    </div>
+</div>

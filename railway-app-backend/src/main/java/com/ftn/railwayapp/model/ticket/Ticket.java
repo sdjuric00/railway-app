@@ -42,4 +42,7 @@ public class Ticket {
     @Column(nullable = false)
     private String qrCode;
 
+    @Column(nullable = false)
+    private boolean used;
+
 }
