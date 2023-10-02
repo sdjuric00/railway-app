@@ -10,5 +10,4 @@ export class TrainDepartureDetailsComponent {
   @Input() train: TrainBasic
   @Input() numOfSoldTickets: number
   @Input() totalNumOfSeats: number
-
 }

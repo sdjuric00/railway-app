@@ -28,8 +28,8 @@ public class SpringConfig {
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .requestMatchers("/auth/**", "/regular-user/register", "/regular-user/activate-account", "/verify/**",
-                        "/departure/{departureId}/{startingStationId}/{destinationStationId}", "/ticket/sold-tickets/{departureId}")
+                .requestMatchers("/auth/**", "/station/get-all", "/regular-user/register", "/regular-user/activate-account", "/verify/**",
+                        "/departure/{departureId}/{startingStationId}/{destinationStationId}", "/departure/timetable/**", "/ticket/sold-tickets/{departureId}")
                 .permitAll().anyRequest().authenticated()
                 .and()
                 .authenticationProvider(authenticationProvider)

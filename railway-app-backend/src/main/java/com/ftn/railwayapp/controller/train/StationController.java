@@ -24,7 +24,6 @@ public class StationController {
 
     @GetMapping("get-all")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_REGULAR')")
     public List<StationResponse> getAll() {
 
         return this.stationService.getAll();

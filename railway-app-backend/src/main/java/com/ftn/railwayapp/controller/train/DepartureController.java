@@ -49,7 +49,6 @@ public class DepartureController {
 
     @GetMapping("timetable")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_REGULAR')")
     public Page<DepartureSearchResponse> departuresTimetable(
             @RequestParam("page") @Min(0) int page,
             @RequestParam("pageSize") @Min(5) @Max(10) int pageSize,

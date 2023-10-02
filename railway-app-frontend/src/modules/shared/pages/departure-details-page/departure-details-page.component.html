@@ -13,6 +13,11 @@
         [startingStation]="departureDetails.startingStation"
         [destinationStation]="departureDetails.destinationStation"
         ></app-departure-details-header>
+
+        <app-map-container 
+        [stationDepartures]="departureDetails.allStations"
+        [startingStation]="departureDetails.startingStation">
+    </app-map-container>
     </div>
 
     <app-ticket-buy-button></app-ticket-buy-button>
