@@ -13,7 +13,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule} from '@angular/material/paginator';
-
+import {MatMenuModule} from '@angular/material/menu'
 
 const MaterialConstants = [
     MatToolbarModule,
@@ -29,7 +29,8 @@ const MaterialConstants = [
     MatRadioModule,
     MatCheckboxModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatMenuModule
 ]
 
 @NgModule({

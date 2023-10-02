@@ -59,8 +59,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         this.authSubscription = this.authService.login(loginRequest).subscribe(
         userResponse => {
           this.authService.setLocalStorage(userResponse);
-          //TODO
-          // this.router.navigate(['/railway-system/shared/home']);
+          this.router.navigate(['/railway-system/shared/departures-timetable'])
         },
         error => {
           this.toastr.error(error.error, 'Error happened.')
@@ -72,8 +71,10 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   onSocialLogin(tokenId: string): void {
     this.authService.onSocialLogin(tokenId).subscribe(
       userResponse => {
-        this.authService.setLocalStorage(userResponse);
-        console.log(userResponse);
+        if (userResponse) {
+          this.authService.setLocalStorage(userResponse);
+          this.router.navigate(['/railway-system/shared/departures-timetable'])
+        }
       },
       err => {
         this.toastr.error(err.error, 'Error happened.')
@@ -91,8 +92,8 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       }
 
       if (this.socialUser) {
-        this.socialAuthService.refreshAccessToken(GoogleLoginProvider.PROVIDER_ID);
-        this.socialAuthService.refreshAccessToken(MicrosoftLoginProvider.PROVIDER_ID);
+        this.socialAuthService.signOut()
+        this.socialUser = null
       }
   }
 

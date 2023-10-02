@@ -30,6 +30,18 @@ export class AuthService {
     );
   }
 
+  getSubjectCurrentUser(): BehaviorSubject<UserLoginResponse | null> {
+    const user = localStorage.getItem('user');
+    if (user !== null && user !== undefined) {
+      const parsedUser: UserLoginResponse = JSON.parse(user);
+      this.currentUser$.next(parsedUser);
+    } else {
+      this.currentUser$.next(null);
+    }
+
+    return this.currentUser$;
+  }
+
   setLocalStorage(loginResponse: LoginResponse): void {
     localStorage.setItem('token', loginResponse.token);
     localStorage.setItem('user', JSON.stringify(loginResponse.userLoginResponse));
@@ -37,12 +49,9 @@ export class AuthService {
     this.currentUser$.next(loginResponse.userLoginResponse);
   }
 
-  logOut(): Observable<null> {
+  logOut(): void {
     this.currentUser$.next(null);
-    return this.http.post<null>(
-      this.configService.LOGOUT_URL,
-      null
-    );
+    localStorage.clear()
   }
 
 }

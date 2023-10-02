@@ -51,3 +51,9 @@ a {
     text-decoration-color: var(--deep-blue);
     text-decoration-thickness: 0.15rem;
 }
+
+.mat-menu-icon {
+    vertical-align: middle;
+    transform: scale(1.5);
+    margin-right: 1rem;
+}

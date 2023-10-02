@@ -1,36 +1,45 @@
 <mat-toolbar color="primary" class="mat-elevation-z3">
-    <a [routerLink]="['/railway-system/user/home']">
+    <a [routerLink]="['/railway-system/user/departures-timetable']">
         <img src="./../../../../../assets/images/Icon-white.png" alt="Train" class="app-icon" />
     </a>
+
+    <!-- Tabs -->
     <div class="spacer regular-links">
         <div>
             &nbsp;&nbsp;
-            <a [routerLink]="['/railway-system/shared/home']" routerLinkActive="active"
+            <a [routerLink]="['/railway-system/shared/departures-timetable']" routerLinkActive="active"
                 >Home</a>
-            <a [routerLink]="['/railway-system/shared/home']">Transaction</a>
+            <a [routerLink]="['/railway-system/shared/departures-timetable']">Transaction</a>
 
         </div>
 
-        <!-- <div class="spacer">
-            <div *ngIf="loggedUser && isAdmin">
-                &nbsp;&nbsp;
-                <a [routerLink]="['/banking-system/admin/home']" routerLinkActive="active" mat-button
-                    color="primary">Home</a>
-                <a [routerLink]="['/banking-system/admin/reports']" routerLinkActive="active" mat-button
-                    color="primary">Reports</a>
-                <a [routerLink]="['/banking-system/admin/new-employer']" routerLinkActive="active" mat-button
-                    color="primary">Employer</a>
-            </div>
-        </div> -->
-
     </div>
+
+    <!-- Button for log in and sign up-->
     <a *ngIf="!loggedUser" [routerLink]="['/railway-system/auth/login']" routerLinkActive="active" mat-button
-     class="button-link" id="login">Log in</a>
+        class="button-link" id="login">Log in</a>
     <a *ngIf="!loggedUser" [routerLink]="['/railway-system/auth/register']" routerLinkActive="active" mat-raised-button
         class="button-link a-sign-up">Sign up</a>
-
-
+    
+    <!-- Mat menu when logged in-->
     <div *ngIf="loggedUser" class="temp">
-        <button mat-raised-button>Log out</button>
+        <mat-icon class="mat-menu-icon" mat-button
+        [matMenuTriggerFor]="menu">account_circle</mat-icon>
     </div>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <mat-icon color="primary">account_circle</mat-icon><span>My profile</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon color="primary">edit</mat-icon><span>Edit profile</span>
+        </button>
+        <!-- <button mat-menu-item (click)="redirectToRessetPassword()">
+            <mat-icon color="primary">lock</mat-icon><span>Password</span>
+        </button> -->
+        <button mat-menu-item (click)="logOut()">
+            <mat-icon color="primary">logout</mat-icon><span>Log out</span>
+        </button>
+    </mat-menu>
+
 </mat-toolbar>

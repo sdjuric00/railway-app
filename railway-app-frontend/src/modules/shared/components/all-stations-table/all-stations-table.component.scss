@@ -4,11 +4,16 @@
     background-color: white;
     border-radius: 1rem;
     padding: 2rem;
-    min-height: 40vh;
+    min-height: 42vh;
 
     h1 {
         font-weight: bold;
         font-size: 2rem;
         margin-bottom: 2rem;
+    }
+
+    span.note {
+        position: absolute;
+        bottom: 5%;
     }
 }

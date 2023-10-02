@@ -47,11 +47,18 @@ export class DeparturesTimetableComponent implements OnDestroy {
       res => {
         this.dataSource = res.content
         this.totalElements = res.totalElements
+        this.checkIfThereIsNoSearchResult()
       },
       error => {
         this.toast.error(error.error, 'Error happened!')
       }
     )
+  }
+
+  checkIfThereIsNoSearchResult(): void {
+    if (this.dataSource.length === 0) {
+      this.toast.info('There are no departures for your criteria.', 'No results')
+    }
   }
 
   goToDetails(element: Departure): void {

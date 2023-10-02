@@ -10,22 +10,38 @@ import { UserLoginResponse } from 'src/modules/shared/model/user';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit, OnDestroy {
-  loggedUser: UserLoginResponse;
+  loggedUser: UserLoginResponse | null;
   authSubscription: Subscription;
   isAdmin: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, 
+              private router: Router
+  ) {
     this.isAdmin = false;
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.authSubscription = this.authService.getSubjectCurrentUser().subscribe(
+      res => {
+        if (res) {
+          this.loggedUser = res
+          this.isAdmin = res.role.roleName === 'ROLE_ADMIN'
+        }
+      }
+    )
+  }
+
+  logOut() {
+    this.authService.logOut()
+    this.router.navigate(['/railway-system/auth/login'])
+    this.loggedUser = null
+    this.isAdmin = false
   }
 
   ngOnDestroy(): void {
-      if (this.authSubscription) {
-        this.authSubscription.unsubscribe()
-      }
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe()
+    }
   }
 
 }
