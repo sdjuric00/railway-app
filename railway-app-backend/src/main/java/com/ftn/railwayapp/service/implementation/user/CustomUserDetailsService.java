@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(final String email) {
         UserSecurityResponse userSecurityResponse;
         try {
-            User user = userService.getVerifiedUser(email);
+            User user = userService.getVerifiedUserByEmail(email);
             userSecurityResponse = new UserSecurityResponse(user.getId(), user.getEmail(),
                     user.getPassword(), user.getRole(), user.isSocialAccount());
         } catch (EntityNotFoundException e) {

@@ -9,6 +9,12 @@ public class ErrorMessages {
     public static final String WRONG_PASSWORD =
             "Password must contain at least 6 characters. " +
                     "At least one number and one special character.";
+    public static final String WRONG_OLD_PASSWORD =
+            "Old password must contain at least 6 characters. " +
+                    "At least one number and one special character.";
+    public static final String WRONG_CONFIRM_PASSWORD =
+            "Confirm password must contain at least 6 characters. " +
+                    "At least one number and one special character. Your old password is not match.";
     public static final String PASSWORD_NOT_LONG_ENOUGH = "Password must be between 6 and 50 characters long.";
     public static final String INVALID_SOCIAL_TOKEN = "Social token is invalid.";
     public static final String WRONG_GENDER = "Gender must be selected.";
@@ -37,4 +43,5 @@ public class ErrorMessages {
 
     //TICKET
     public static final String WRONG_PASSENGERS = "There should be at least one passenger.";
+
 }

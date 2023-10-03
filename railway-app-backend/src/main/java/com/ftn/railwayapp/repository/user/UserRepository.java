@@ -12,7 +12,10 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select u from User u where u.email=?1 and u.verified=true")
-    Optional<User> getVerifiedUser(String email);
+    Optional<User> getVerifiedUserByEmail(String email);
+
+    @Query("select u from User u where u.id=?1 and u.verified=true")
+    Optional<User> getVerifiedUserById(Long id);
 
     @Query("select u from User u where u.email=?1")
     Optional<User> findByEmail(String email);
