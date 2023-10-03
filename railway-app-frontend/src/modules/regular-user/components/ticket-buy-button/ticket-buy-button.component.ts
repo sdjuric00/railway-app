@@ -23,7 +23,8 @@ export class TicketBuyButtonComponent {
       data: {
         departureId: this.departureId,
         startingStation: this.startingStation,
-        destinationStation: this.destinationStation
+        destinationStation: this.destinationStation,
+        dialogRef: this.dialogRef 
       } as TicketDialogData,
     })
   }

@@ -3,6 +3,7 @@ package com.ftn.railwayapp.service.implementation.email;
 import com.ftn.railwayapp.exception.MailCannotBeSentException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
@@ -24,6 +25,22 @@ public class HTMLEmailService {
             helper.setFrom(from);
             helper.setTo(to);
             helper.setText(msg, true);
+            mailSender.send(message);
+        } catch (MessagingException ex) {
+            throw new MailCannotBeSentException(from);
+        }
+    }
+
+    public void sendMailWithAttachment(String from, String to, String subject, String msg, byte[] file) throws MailCannotBeSentException {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            message.setSubject(subject);
+            MimeMessageHelper helper;
+            helper = new MimeMessageHelper(message, true);
+            helper.setFrom(from);
+            helper.setTo(to);
+            helper.setText(msg, true);
+            helper.addAttachment("Boarding_ticket.pdf", new ByteArrayResource(file));
             mailSender.send(message);
         } catch (MessagingException ex) {
             throw new MailCannotBeSentException(from);

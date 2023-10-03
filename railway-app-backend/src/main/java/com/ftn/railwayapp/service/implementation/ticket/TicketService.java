@@ -1,15 +1,13 @@
 package com.ftn.railwayapp.service.implementation.ticket;
 
-import com.ftn.railwayapp.exception.EntityNotFoundException;
-import com.ftn.railwayapp.exception.InvalidTimeException;
-import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
-import com.ftn.railwayapp.exception.QRCodeException;
+import com.ftn.railwayapp.exception.*;
 import com.ftn.railwayapp.model.ticket.Ticket;
 import com.ftn.railwayapp.model.train.Departure;
 import com.ftn.railwayapp.model.train.StationDeparture;
 import com.ftn.railwayapp.model.user.RegularUser;
 import com.ftn.railwayapp.model.user.User;
 import com.ftn.railwayapp.repository.ticket.TicketRepository;
+import com.ftn.railwayapp.service.implementation.email.EmailService;
 import com.ftn.railwayapp.service.interfaces.*;
 import com.ftn.railwayapp.util.Constants;
 import com.ftn.railwayapp.util.PDFGenerator;
@@ -18,9 +16,6 @@ import com.lowagie.text.DocumentException;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,15 +32,19 @@ public class TicketService implements ITicketService {
 
     private final IBalanceAccountService balanceAccountService;
 
+    private final EmailService emailService;
+
     public TicketService(TicketRepository ticketRepository,
                          IUserService userService,
                          IDepartureService departureService,
-                         IBalanceAccountService balanceAccountService
+                         IBalanceAccountService balanceAccountService,
+                         EmailService emailService
     ) {
         this.ticketRepository = ticketRepository;
         this.userService = userService;
         this.departureService = departureService;
         this.balanceAccountService = balanceAccountService;
+        this.emailService = emailService;
     }
 
     @Override
@@ -60,7 +59,7 @@ public class TicketService implements ITicketService {
                                 String startStationId,
                                 String destinationStationId,
                                 List<String> passengers
-    ) throws EntityNotFoundException, OperationCannotBeCompletedException, QRCodeException, InvalidTimeException {
+    ) throws EntityNotFoundException, OperationCannotBeCompletedException, QRCodeException, InvalidTimeException, IOException, MailCannotBeSentException {
         User regularUser = this.userService.getVerifiedRegularUserById(userId);
         Departure departure = this.departureService.getById(departureId);
         StationDeparture startingDeparture = this.departureService.getStationDepartureFromDeparture(departure, startStationId);
@@ -76,6 +75,7 @@ public class TicketService implements ITicketService {
         QRCodeGenerator.createQrCode(Constants.getQRCodePath(ticket.getId().toString()), ticket.getId().toString());
         ticket.setQrCode(ticket.getId() + ".png");
         this.createPDF(departure, startingDeparture, destinationDeparture, price, ticket.getId(), passengers);
+        this.emailService.sendTicketPurchaseMail(ticket.getId(), regularUser.getFullName(), PDFGenerator.readPDFAsBytes(PDF_OUT_FILE_PATH + ticket.getId() + ".pdf"));
         this.ticketRepository.save(ticket);
 
         return true;

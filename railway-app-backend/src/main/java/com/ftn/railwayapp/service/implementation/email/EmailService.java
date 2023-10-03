@@ -13,8 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static com.ftn.railwayapp.util.Constants.TEMPLATE_FILE_PATH;
-import static com.ftn.railwayapp.util.EmailConstants.EMAIL;
-import static com.ftn.railwayapp.util.EmailConstants.SUBJECT_VERIFY_USER;
+import static com.ftn.railwayapp.util.EmailConstants.*;
 
 @Service
 public class EmailService {
@@ -34,6 +33,16 @@ public class EmailService {
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
         HTMLEmailService mm = (HTMLEmailService) context.getBean("htmlMail");
         mm.sendMail(EMAIL, EMAIL, SUBJECT_VERIFY_USER, emailTemplate);
+    }
+
+    @Async
+    public void sendTicketPurchaseMail(Long ticketId, String fullName, byte[] file)
+            throws MailException, IOException, MailCannotBeSentException {
+        String pathToHTMLFile = TEMPLATE_FILE_PATH + "sendTicketPurchaseConfirmationMailTemplate.html";
+        String emailTemplate_PartOne = setEmailTemplate(pathToHTMLFile, "_fullName_", fullName);
+        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
+        HTMLEmailService mm = (HTMLEmailService) context.getBean("htmlMail");
+        mm.sendMailWithAttachment(EMAIL, EMAIL, SUBJECT_TICKET_PURCHASE, emailTemplate_PartOne, file);
     }
 
     private String readHtmlFile(String filePath) throws IOException {

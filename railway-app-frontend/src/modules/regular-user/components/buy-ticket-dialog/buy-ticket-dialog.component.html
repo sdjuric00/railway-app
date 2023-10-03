@@ -1,4 +1,4 @@
-<div *ngIf="data" class="center-content dialog-container">
+<div *ngIf="data && !showSpinner" class="center-content dialog-container">
 
     <h1>{{data.startingStation.station.name}} <mat-icon class="inline-icon">arrow_forward</mat-icon>
         {{data.destinationStation.station.name}}</h1>
@@ -22,10 +22,12 @@
                 class="buy-button" 
                 mat-raised-button 
                 [disabled]="this.passengers.length <= 0" 
-                [mat-dialog-close]="null" 
                 (click)="buyTicket()"
                 >Buy
             </button>
         </div>
     </div>
+</div>
+<div *ngIf="showSpinner" class="spinner-container center-content">
+    <div><mat-spinner color="primary"></mat-spinner></div>
 </div>

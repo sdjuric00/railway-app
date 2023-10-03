@@ -7,8 +7,9 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.thymeleaf.context.Context;
 
-
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class PDFGenerator {
@@ -39,6 +40,11 @@ public class PDFGenerator {
         renderer.createPDF(outputStream);
 
         outputStream.close();
+    }
+
+    public static byte[] readPDFAsBytes(String filePath) throws IOException {
+
+       return Files.readAllBytes(Paths.get(filePath));
     }
 
 }

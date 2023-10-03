@@ -1,9 +1,6 @@
 package com.ftn.railwayapp.controller.ticket;
 
-import com.ftn.railwayapp.exception.EntityNotFoundException;
-import com.ftn.railwayapp.exception.InvalidTimeException;
-import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
-import com.ftn.railwayapp.exception.QRCodeException;
+import com.ftn.railwayapp.exception.*;
 import com.ftn.railwayapp.request.ticket.TicketRequest;
 import com.ftn.railwayapp.service.interfaces.ITicketService;
 import jakarta.validation.Valid;
@@ -12,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("ticket")
@@ -35,7 +34,9 @@ public class TicketController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('ROLE_REGULAR')")
     public boolean createTicket(@RequestBody @Valid TicketRequest ticketRequest)
-            throws OperationCannotBeCompletedException, EntityNotFoundException, QRCodeException, InvalidTimeException {
+            throws OperationCannotBeCompletedException, EntityNotFoundException,
+            QRCodeException, InvalidTimeException, IOException, MailCannotBeSentException
+    {
 
         return this.ticketService.createTicket(
           ticketRequest.getUserId(),

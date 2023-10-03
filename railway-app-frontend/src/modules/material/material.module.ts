@@ -15,6 +15,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import {MatMenuModule} from '@angular/material/menu'
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 const MaterialConstants = [
@@ -33,7 +34,8 @@ const MaterialConstants = [
     MatTableModule,
     MatPaginatorModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
 ]
 
 @NgModule({
