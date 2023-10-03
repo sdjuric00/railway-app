@@ -59,6 +59,10 @@ export class DepartureDetailsPageComponent implements OnInit, OnDestroy {
     )
   }
 
+  updateSoldTickets(): void {
+    this.loadSoldTickets()
+  }
+
   loadSoldTickets(): void {
     if (this.departureId) {
       this.ticketSubscription = this.ticketService.getNumOfSoldTickets(this.departureId).subscribe(

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ITicketService {
-    int getNumOfSoldTicketsForDeparture(String departureId);
+    Integer getNumOfSoldTicketsForDeparture(String departureId);
 
     boolean createTicket(Long userId, String departureId, String startStationId, String destinationStationId, List<String> passengers) throws EntityNotFoundException, OperationCannotBeCompletedException, QRCodeException, InvalidTimeException, IOException, MailCannotBeSentException;
 

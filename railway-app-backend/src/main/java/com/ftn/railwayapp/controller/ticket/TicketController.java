@@ -25,7 +25,7 @@ public class TicketController {
 
     @GetMapping("sold/{departureId}")
     @ResponseStatus(HttpStatus.OK)
-    public int getNumOfSoldTickets(@PathVariable @NotNull String departureId) {
+    public Integer getNumOfSoldTickets(@PathVariable @NotNull String departureId) {
 
         return this.ticketService.getNumOfSoldTicketsForDeparture(departureId);
     }

@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
-    @Query("select t from Ticket t where t.departureId=?1")
-    List<Ticket> getNumOfSoldTicketsForDeparture(String departureId);
+    @Query("SELECT COALESCE(SUM(t.numOfSeatsTaken), 0) FROM Ticket t WHERE t.departureId = ?1")
+    Integer getNumOfSoldTicketsForDeparture(String departureId);
 }

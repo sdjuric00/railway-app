@@ -9,7 +9,7 @@
             &nbsp;&nbsp;
             <a [routerLink]="['/railway-system/shared/departures-timetable']" routerLinkActive="active"
                 >Home</a>
-            <a [routerLink]="['/railway-system/shared/departures-timetable']">Transaction</a>
+            <a *ngIf="loggedUser && !isAdmin" [routerLink]="['/railway-system/shared/departures-timetable']">Transactions</a>
 
         </div>
 
@@ -29,14 +29,8 @@
 
     <mat-menu #menu="matMenu">
         <button mat-menu-item>
-            <mat-icon color="primary">account_circle</mat-icon><span>My profile</span>
-        </button>
-        <button mat-menu-item>
             <mat-icon color="primary">edit</mat-icon><span>Edit profile</span>
         </button>
-        <!-- <button mat-menu-item (click)="redirectToRessetPassword()">
-            <mat-icon color="primary">lock</mat-icon><span>Password</span>
-        </button> -->
         <button mat-menu-item (click)="logOut()">
             <mat-icon color="primary">logout</mat-icon><span>Log out</span>
         </button>

@@ -44,21 +44,34 @@ public class Ticket {
     private String qrCode;
 
     @Column(nullable = false)
+    private int numOfSeatsTaken;
+
+    @Column(nullable = false)
     private boolean used = false;
 
     public Ticket(RegularUser user,
                   String departureId,
                   String startStationId,
                   String destinationStationId,
-                  String passengers,
+                  List<String> passengers,
                   double totalPrice
     ) {
         this.user = user;
         this.departureId = departureId;
         this.startStationId = startStationId;
         this.destinationStationId = destinationStationId;
-        this.passengers = passengers;
+        this.passengers = convertPassengersToString(passengers);
         this.totalPrice = totalPrice;
         this.qrCode = null;
+        this.numOfSeatsTaken = passengers.size();
+    }
+
+    private String convertPassengersToString(List<String> passengers) {
+        String passengersConcatenated = "";
+        for (String passenger : passengers) {
+            passengersConcatenated = passengersConcatenated.concat(passenger + ",");
+        }
+
+        return passengersConcatenated;
     }
 }

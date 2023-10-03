@@ -25,5 +25,6 @@
     [departureId]="departureDetails.id" 
     [destinationStation]="departureDetails.destinationStation"
     [startingStation]="departureDetails.startingStation"
+    (onDialogCloseEvent)="updateSoldTickets()"
     ></app-ticket-buy-button>
 </div>

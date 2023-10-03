@@ -48,9 +48,9 @@ public class TicketService implements ITicketService {
     }
 
     @Override
-    public int getNumOfSoldTicketsForDeparture(String departureId) {
+    public Integer getNumOfSoldTicketsForDeparture(String departureId) {
 
-        return this.ticketRepository.getNumOfSoldTicketsForDeparture(departureId).size();
+        return this.ticketRepository.getNumOfSoldTicketsForDeparture(departureId);
     }
 
     @Override
@@ -76,6 +76,7 @@ public class TicketService implements ITicketService {
         ticket.setQrCode(ticket.getId() + ".png");
         this.createPDF(departure, startingDeparture, destinationDeparture, price, ticket.getId(), passengers);
         this.emailService.sendTicketPurchaseMail(ticket.getId(), regularUser.getFullName(), PDFGenerator.readPDFAsBytes(PDF_OUT_FILE_PATH + ticket.getId() + ".pdf"));
+
         this.ticketRepository.save(ticket);
 
         return true;
@@ -119,16 +120,9 @@ public class TicketService implements ITicketService {
     ) {
         return this.ticketRepository.saveAndFlush(
                 new Ticket((RegularUser) regularUser, departureId, startStationId, destinationStationId,
-                        convertPassengersToString(passengers), price)
+                        passengers, price)
         );
     }
 
-    private String convertPassengersToString(List<String> passengers) {
-        String passengersConcatenated = "";
-        for (String passenger : passengers) {
-            passengersConcatenated = passengersConcatenated.concat(passenger + ",");
-        }
 
-        return passengersConcatenated;
-    }
 }
