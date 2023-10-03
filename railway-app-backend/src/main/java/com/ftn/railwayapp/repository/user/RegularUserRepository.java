@@ -11,4 +11,7 @@ import java.util.Optional;
 public interface RegularUserRepository  extends JpaRepository<RegularUser, Long> {
     @Query("select ru from RegularUser ru where ru.email=?1")
     Optional<RegularUser> getRegularUserByEmail(String email);
+
+    @Query("select ru from RegularUser ru where ru.id=?1 and ru.verified=true")
+    Optional<RegularUser> getVerifiedRegularUserByEmail(Long id);
 }

@@ -34,4 +34,7 @@ public class ErrorMessages {
     public static final String STARTING_STATION = "Field starting station should be either true/false.";
     public static final String WRONG_STATION_DEPARTURES = "Station departures cannot be empty.";
 
+
+    //TICKET
+    public static final String WRONG_PASSENGERS = "There should be at least one passenger.";
 }

@@ -24,6 +24,12 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User getVerifiedRegularUserById(Long id) throws EntityNotFoundException {
+        return userRepository.getVerifiedRegularUserById(id)
+                .orElseThrow(() -> new EntityNotFoundException("user"));
+    }
+
+    @Override
     public Optional<User> getVerifiedUserExistence(String email) {
         return userRepository.getVerifiedUser(email);
     }

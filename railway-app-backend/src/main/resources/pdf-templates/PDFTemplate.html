@@ -1,0 +1,70 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+
+        .container {
+            position: relative;
+        }
+
+        .center-content {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div style="position: absolute; right: 16px">
+            <img  th:src="@{${'./src/main/resources/static/qrCode/' + srcQR}}" alt="QR code" />
+        </div>
+
+        <h1 class="center-content">Serbian Railways</h1>
+        <h3 class="center-content" th:text="'Boarding ticket ' + ${startingStation + ' - ' + destinationStation}"></h3>
+        <p class="center-content">
+            <span th:text="${'Leaves at ' + leavingTime + ' and arrives at ' + arrivalTime}"></span>
+        </p>
+
+        <p>
+            <span th:text="${'Date: ' + date}"></span>
+        </p>
+
+        <p>
+            <span th:text="${startingStation + ' - ' + destinationStation}"></span>
+        </p>
+
+        <p>
+            <span th:text="${'Paid: ' + price + ' tokens'}"></span>
+        </p>
+
+        <hr />
+        <div>
+            <table>
+                <thead>
+                <th>Passengers:</th>
+                </thead>
+                <tr th:each="passenger : ${passengers}">
+                    <td th:text="${passenger}"/>
+                </tr>
+            </table>
+        </div>
+
+        <hr/>
+        <h3>Train</h3>
+        <p th:text="${'Name: ' + train.name}"></p>
+        <p th:text="${'Type: ' + train.type}"></p>
+        <hr/>
+
+        <br/>
+        <div style="font-size: 10px">
+            <p>*Note: Please come to your station at least 5 minutes earlier</p>
+            <p>*Note: For more information call Serbian Railways call center</p>
+            <p>Thank you for travelling with us! Serbian Railways team.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

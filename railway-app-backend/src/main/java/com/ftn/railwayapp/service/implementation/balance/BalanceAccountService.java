@@ -1,5 +1,7 @@
 package com.ftn.railwayapp.service.implementation.balance;
 
+import com.ftn.railwayapp.exception.EntityNotFoundException;
+import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
 import com.ftn.railwayapp.model.account.BalanceAccount;
 import com.ftn.railwayapp.repository.balance.BalanceAccountRepository;
 import com.ftn.railwayapp.service.interfaces.IBalanceAccountService;
@@ -18,9 +20,31 @@ public class BalanceAccountService implements IBalanceAccountService {
     }
 
     @Override
+    public BalanceAccount getBalanceAccountById(Long id) throws EntityNotFoundException {
+        return this.balanceAccountRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("balance account"));
+    }
+
+    @Override
     public BalanceAccount createBalanceAccount() {
         String accNumber = generateBalanceAccountNumber();
 
         return new BalanceAccount(accNumber);
+    }
+
+    @Override
+    public boolean createTransaction(int price, Long balanceAccountId)
+            throws OperationCannotBeCompletedException, EntityNotFoundException
+    {
+        BalanceAccount balanceAccount = getBalanceAccountById(balanceAccountId);
+        if (balanceAccount.getTokensNum() < price) {
+            throw new OperationCannotBeCompletedException("Transaction declined, you don't have enough tokens.");
+        }
+
+        balanceAccount.setTokensNum(balanceAccount.getTokensNum() - price);
+        balanceAccount.setTotalTokenSpending(balanceAccount.getTotalTokenSpending() + price);
+        this.balanceAccountRepository.save(balanceAccount);
+
+        return true;
     }
 }

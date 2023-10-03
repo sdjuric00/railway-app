@@ -21,20 +21,27 @@ public class BalanceTransaction {
     @Column(nullable = false)
     private LocalDateTime timeStamp;
 
-    @Column
+    @Column(nullable = false)
     private int tokensNum;
 
-    @Column
+    @Column(nullable = false)
     private int moneySpent;
 
     @Column(nullable = false)
     private String currency;
 
-    @Column
-    private boolean bought;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="balance_account_id", nullable=false)
     private BalanceAccount balanceAccount;
 
+    public BalanceTransaction(LocalDateTime timeStamp,
+                              int tokensNum,
+                              int moneySpent,
+                              String currency
+    ) {
+        this.timeStamp = timeStamp;
+        this.tokensNum = tokensNum;
+        this.moneySpent = moneySpent;
+        this.currency = currency;
+    }
 }

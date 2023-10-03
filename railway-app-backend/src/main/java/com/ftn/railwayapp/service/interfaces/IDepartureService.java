@@ -5,6 +5,7 @@ import com.ftn.railwayapp.exception.InvalidDepartureDataException;
 import com.ftn.railwayapp.exception.InvalidTimeException;
 import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
 import com.ftn.railwayapp.model.train.Departure;
+import com.ftn.railwayapp.model.train.StationDeparture;
 import com.ftn.railwayapp.request.train.StationDepartureRequest;
 import com.ftn.railwayapp.response.train.DepartureDetailsResponse;
 import com.ftn.railwayapp.response.train.DepartureResponse;
@@ -22,4 +23,9 @@ public interface IDepartureService {
     Page<DepartureSearchResponse> departuresTimetable(int page, int pageSize, String trainType, String startingStationId, String destinationStationId, LocalDateTime time) throws OperationCannotBeCompletedException;
     Departure getById(String id) throws EntityNotFoundException;
     DepartureDetailsResponse getDepartureDetails(String departureId, String startingStationId, String destinationStationId) throws EntityNotFoundException, OperationCannotBeCompletedException;
+    void checkStationsOrder(int startingStationOrder, int destinationStationOrder) throws OperationCannotBeCompletedException;
+    public StationDeparture getStationDepartureFromDeparture(Departure departure, String stationId)
+            throws OperationCannotBeCompletedException;
+
+    void checkDepartureInThePast(LocalDateTime startTime) throws InvalidTimeException;
 }

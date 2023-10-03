@@ -99,7 +99,10 @@ public class DepartureService implements IDepartureService {
         );
     }
 
-    private StationDeparture getStationDepartureFromDeparture(Departure departure, String stationId) throws OperationCannotBeCompletedException {
+    @Override
+    public StationDeparture getStationDepartureFromDeparture(Departure departure, String stationId)
+            throws OperationCannotBeCompletedException
+    {
         for (StationDeparture stationDeparture : departure.getStationDepartures()) {
             if (stationDeparture.getStation().getId().equals(stationId)) {
                 return stationDeparture;
@@ -107,6 +110,20 @@ public class DepartureService implements IDepartureService {
         }
 
         throw new OperationCannotBeCompletedException("Station is not valid.");
+    }
+
+    @Override
+    public void checkDepartureInThePast(LocalDateTime startTime) throws InvalidTimeException {
+        if (startTime.isBefore(LocalDateTime.now())) {
+            throw new InvalidTimeException("Departure is in the past");
+        }
+    }
+
+    @Override
+    public void checkStationsOrder(int startingStationOrder, int destinationStationOrder) throws OperationCannotBeCompletedException {
+        if (startingStationOrder >= destinationStationOrder) {
+            throw new OperationCannotBeCompletedException("Station is not valid.");
+        }
     }
 
     private List<StationDeparture> createStationDepartures(List<StationDepartureRequest> stationDeparturesReq) throws EntityNotFoundException, InvalidDepartureDataException {
@@ -125,12 +142,6 @@ public class DepartureService implements IDepartureService {
         }
 
         return stationDepartures;
-    }
-
-    private void checkStationsOrder(int startingStationOrder, int destinationStationOrder) throws OperationCannotBeCompletedException {
-        if (startingStationOrder >= destinationStationOrder) {
-            throw new OperationCannotBeCompletedException("Station is not valid.");
-        }
     }
 
     private void checkStationDepartureValidity(StationDepartureRequest stationDepartureRequest) throws InvalidDepartureDataException {

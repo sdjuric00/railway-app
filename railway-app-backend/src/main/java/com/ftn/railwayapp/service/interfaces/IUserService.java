@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface IUserService {
 
     User getVerifiedUser(String email) throws EntityNotFoundException;
+    User getVerifiedRegularUserById(Long id) throws EntityNotFoundException;
     Optional<User> getVerifiedUserExistence(String email);
     boolean checkIfUserAlreadyExists(String email);
 }

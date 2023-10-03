@@ -1,5 +1,6 @@
 package com.ftn.railwayapp.model.ticket;
 
+import com.ftn.railwayapp.model.user.RegularUser;
 import com.ftn.railwayapp.model.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class Ticket {
 
     @OneToOne()
     @JoinColumn(name = "user_id")
-    private User user;
+    private RegularUser user;
 
     @Column(nullable = false)
     private String departureId;
@@ -34,15 +35,30 @@ public class Ticket {
     private String destinationStationId;
 
     @Column(nullable = false)
-    private String additionalUsers;
+    private String passengers;
 
     @Column(nullable = false)
     private double totalPrice;
 
-    @Column(nullable = false)
+    @Column
     private String qrCode;
 
     @Column(nullable = false)
-    private boolean used;
+    private boolean used = false;
 
+    public Ticket(RegularUser user,
+                  String departureId,
+                  String startStationId,
+                  String destinationStationId,
+                  String passengers,
+                  double totalPrice
+    ) {
+        this.user = user;
+        this.departureId = departureId;
+        this.startStationId = startStationId;
+        this.destinationStationId = destinationStationId;
+        this.passengers = passengers;
+        this.totalPrice = totalPrice;
+        this.qrCode = null;
+    }
 }

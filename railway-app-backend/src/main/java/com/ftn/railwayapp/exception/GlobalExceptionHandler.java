@@ -100,4 +100,10 @@ public class GlobalExceptionHandler {
         return exception.getMessage();
     }
 
+    @ExceptionHandler(value = QRCodeException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String qRCodeException(QRCodeException exception) {
+        return exception.getMessage();
+    }
+
 }

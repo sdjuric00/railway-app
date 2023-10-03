@@ -29,9 +29,6 @@ public class Departure {
     @DBRef
     private Train train;
 
-    @DBRef
-    private List<OccupiedSeats> occupiedSeats = new ArrayList<>();
-
     public Departure(LocalDateTime startTime,
                      int durationInMinutes,
                      List<StationDeparture> stationDepartures,
