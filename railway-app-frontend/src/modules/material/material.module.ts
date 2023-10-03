@@ -16,7 +16,7 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import {MatMenuModule} from '@angular/material/menu'
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const MaterialConstants = [
     MatToolbarModule,
@@ -35,7 +35,8 @@ const MaterialConstants = [
     MatPaginatorModule,
     MatMenuModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
 ]
 
 @NgModule({

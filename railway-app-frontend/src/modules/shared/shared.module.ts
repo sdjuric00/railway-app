@@ -18,6 +18,9 @@ import { DepartureDetailsHeaderComponent } from './components/departure-details-
 import { MapContainerComponent } from './components/map-container/map-container.component';
 import { TicketBuyButtonComponent } from "../regular-user/components/ticket-buy-button/ticket-buy-button.component";
 import { RegularModule } from "../regular-user/regular.module";
+import { UserProfileManagementPageComponent } from './pages/user-profile-management-page/user-profile-management-page.component';
+import { UserProfileUpdateComponent } from './components/user-profile-update/user-profile-update.component';
+import { UserPasswordUpdateComponent } from './components/user-password-update/user-password-update.component';
 
 
 @NgModule({
@@ -31,7 +34,7 @@ import { RegularModule } from "../regular-user/regular.module";
      AllStationsTableComponent, 
      StationRowComponent, 
      DepartureDetailsHeaderComponent, 
-     MapContainerComponent, 
+     MapContainerComponent, UserProfileManagementPageComponent, UserProfileUpdateComponent, UserPasswordUpdateComponent, 
   ],
   imports: [
     RegularModule,

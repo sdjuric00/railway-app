@@ -31,6 +31,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
     )
   }
 
+  redirectToUserManagementPage(): void {
+    this.router.navigate(['/railway-system/shared/user'])
+  }
+
   logOut() {
     this.authService.logOut()
     this.router.navigate(['/railway-system/auth/login'])

@@ -1,6 +1,7 @@
 package com.ftn.railwayapp.service.implementation.user;
 
 import com.ftn.railwayapp.exception.EntityNotFoundException;
+import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
 import com.ftn.railwayapp.exception.PasswordsDoNotMatchException;
 import com.ftn.railwayapp.model.enums.Gender;
 import com.ftn.railwayapp.model.user.User;
@@ -11,8 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.ftn.railwayapp.util.Helper.getHash;
-import static com.ftn.railwayapp.util.Helper.passwordsDontMatch;
+import static com.ftn.railwayapp.util.Helper.*;
 
 @Service
 public class UserService implements IUserService {
@@ -54,7 +54,6 @@ public class UserService implements IUserService {
 
     @Override
     public UserResponse update(Long id,
-                               String email,
                                String fullName,
                                Gender gender,
                                String city,
@@ -63,7 +62,6 @@ public class UserService implements IUserService {
                                String zipcode
     ) throws EntityNotFoundException {
         User user = getVerifiedUserById(id);
-        user.setEmail(email);
         user.setFullName(fullName);
         user.setGender(gender);
         user.getAddress().setCity(city);
@@ -79,10 +77,13 @@ public class UserService implements IUserService {
                                   String oldPassword,
                                   String newPassword,
                                   String confirmPassword
-    ) throws EntityNotFoundException, PasswordsDoNotMatchException {
+    ) throws EntityNotFoundException, PasswordsDoNotMatchException, OperationCannotBeCompletedException {
         User user = getVerifiedUserById(id);
-        String hashedOldPassword = getHash(oldPassword);
-        checkPasswordsMatching(newPassword, confirmPassword, user, hashedOldPassword);
+        if (user.isSocialAccount()) {
+            throw new OperationCannotBeCompletedException("Social account logged users cannot change password.");
+        }
+
+        checkPasswordsMatching(newPassword, confirmPassword, user, oldPassword);
 
         user.setPassword(getHash(newPassword));
         this.userRepository.save(user);
@@ -90,8 +91,8 @@ public class UserService implements IUserService {
         return true;
     }
 
-    private void checkPasswordsMatching(String newPassword, String confirmPassword, User user, String hashedOldPassword) throws PasswordsDoNotMatchException {
-        if (passwordsDontMatch(user.getPassword(), hashedOldPassword)) {
+    private void checkPasswordsMatching(String newPassword, String confirmPassword, User user, String oldPassword) throws PasswordsDoNotMatchException {
+        if (!oldPasswordsMatch(oldPassword, user.getPassword())) {
             throw new PasswordsDoNotMatchException("Your old password is not correct!");
         } else if (passwordsDontMatch(newPassword, confirmPassword)) {
             throw new PasswordsDoNotMatchException("New password and confirm password don't match.");

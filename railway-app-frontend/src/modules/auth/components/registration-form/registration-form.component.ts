@@ -3,9 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { GenderOptions } from 'src/modules/shared/model/gender';
 import { RegularUserRegistrationRequest } from 'src/modules/shared/model/regular-user';
 import { RegularUserService } from 'src/modules/shared/services/regular-user/regular-user.service';
+import { genderOptions } from 'src/modules/shared/model/user';
+import { GenderOptions } from 'src/modules/shared/model/gender';
+
 
 @Component({
   selector: 'app-registration-form',
@@ -55,12 +57,8 @@ export class RegistrationFormComponent implements OnDestroy {
       ]),
   });
 
-  genderOptions: GenderOptions[] = [
-    {value: 'MALE', viewValue: 'Male'},
-    {value: 'FEMALE', viewValue: 'Female'},
-    {value: 'NOT_PROVIDED', viewValue: 'Other/Not provided'},
-  ];
-
+  
+  genderOptions: GenderOptions[] = genderOptions
   hide: boolean
   regularUserSubscription: Subscription;
 
@@ -108,29 +106,29 @@ export class RegistrationFormComponent implements OnDestroy {
 }
 
 
-  register() {
-    if (this.isPasswordsMismatch()) {
-      this.toastr.error('Password and confirm password are not the same!', 'Password mismatch')
-    } else if (this.registrationForm.invalid) {
-      this.toastr.error('You made a mistake in form, check all fields.', 'Error happened')
-    } else {
-      const request: RegularUserRegistrationRequest | null = this.createRegistrationRequest()
-      this.regularUserSubscription = this.regularUserService.register(request).subscribe(
-        res => {
-          this.toastr.success('Registration is successful, check your email.', 'Success!')
-          this.router.navigate(['/railway-system/auth/login'])
-        },
-        err => {
-          this.toastr.error(err.error, 'Error happened!')
-        }
-      );
-    }
-  }
-
-  ngOnDestroy(): void {
-      if (this.regularUserSubscription) {
-        this.regularUserSubscription.unsubscribe()
+register() {
+  if (this.isPasswordsMismatch()) {
+    this.toastr.error('Password and confirm password are not the same!', 'Password mismatch')
+  } else if (this.registrationForm.invalid) {
+    this.toastr.error('You made a mistake in form, check all fields.', 'Error happened')
+  } else {
+    const request: RegularUserRegistrationRequest | null = this.createRegistrationRequest()
+    this.regularUserSubscription = this.regularUserService.register(request).subscribe(
+      res => {
+        this.toastr.success('Registration is successful, check your email.', 'Success!')
+        this.router.navigate(['/railway-system/auth/login'])
+      },
+      err => {
+        this.toastr.error(err.error, 'Error happened!')
       }
+    );
   }
+}
+
+ngOnDestroy(): void {
+    if (this.regularUserSubscription) {
+      this.regularUserSubscription.unsubscribe()
+    }
+}
 
 }

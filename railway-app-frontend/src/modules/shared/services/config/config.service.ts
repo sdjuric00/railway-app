@@ -22,6 +22,21 @@ export class ConfigService {
   REGISTER_REGULAR_USER_URL = `${this.REGULAR_USER_URL}/register`
   ACTIVATE_ACCOUNT_URL = `${this.REGULAR_USER_URL}/activate-account`
 
+  ///////////USER//////////
+  USER_URL = `${this.API_URL}/user`
+
+  getUserByIdURL(id: string | null): string {
+    return `${this.USER_URL}/${id}`
+  }
+
+  updateUserByIdURL(id: number): string {
+    return `${this.USER_URL}/${id}`
+  }
+
+  changePasswordURL(id: number): string {
+    return `${this.USER_URL}/change-password/${id}`
+  }
+
   ////////////VERIFY//////////////
   VERIFY_USER_URL = `${this.API_URL}/verify`
   SEND_CODE_AGAIN_URL = `${this.VERIFY_USER_URL}/send-code-again`

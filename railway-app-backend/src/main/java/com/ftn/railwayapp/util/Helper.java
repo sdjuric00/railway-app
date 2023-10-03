@@ -26,6 +26,11 @@ public class Helper {
         return !password.equals(confirmationPassword);
     }
 
+    public static boolean oldPasswordsMatch(String password, String hashPassword) {
+        final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(password, hashPassword);
+    }
+
     public static String generateBalanceAccountNumber() {
         return String.valueOf((long) (Math.pow(10, 12) + random.nextDouble() * Math.pow(10, 12)));
     }

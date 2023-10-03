@@ -1,0 +1,102 @@
+<div class="registration-container user-profile-container">
+
+    <h2 class="center-content">User profile</h2>
+    <form color="primary" [formGroup]="userUpdateForm">
+    
+        <div class="center-content fields-row" style="display: flex;">
+    
+            <mat-form-field matTooltip="Email cannot be changed" class="full-width" appearance="fill">
+                <mat-label><b>Email</b></mat-label>
+                <b><input disabled="true" [value]="userDetailData.email" matInput type="text" name="email" /></b>
+            </mat-form-field>
+    
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Full Name</mat-label>
+                <input matInput formControlName="fullName" type="text" name="fullName" />
+                <mat-error *ngIf="userUpdateForm.get('fullName')?.hasError('required')">
+                    Full name is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="userUpdateForm.get('fullName')?.hasError('minlength') ||
+                    userUpdateForm.get('fullName')?.hasError('pattern') &&
+                    !userUpdateForm.get('fullName')?.hasError('required')">
+                    Full name is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+    
+        </div>
+    
+        <div class="center-content fields-row" style="display: flex;">
+    
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city" type="text" name="city" />
+                <mat-error *ngIf="userUpdateForm.get('city')?.hasError('required')">
+                    City is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="userUpdateForm.get('city')?.hasError('pattern') &&
+                                !userUpdateForm.get('city')?.hasError('required')">
+                    City is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Street</mat-label>
+                <input matInput formControlName="street" type="text" name="street" />
+                <mat-error *ngIf="userUpdateForm.get('street')?.hasError('required')">
+                    Street is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="userUpdateForm.get('street')?.hasError('pattern') &&
+                                !userUpdateForm.get('street')?.hasError('required')">
+                    Street is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+    
+        </div>
+    
+        <div class="center-content fields-row" style="display: flex;">
+    
+            <mat-form-field class="last-row-fields" appearance="fill">
+                <mat-label>Street number</mat-label>
+                <input matInput formControlName="streetNumber" type="text" name="streetNumber" />
+                <mat-error *ngIf="userUpdateForm.get('streetNumber')?.hasError('required')">
+                    Street number is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="userUpdateForm.get('streetNumber')?.hasError('pattern') &&
+                                        !userUpdateForm.get('streetNumber')?.hasError('required')">
+                    Street number is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field class="last-row-fields" appearance="fill">
+                <mat-label>Zipcode</mat-label>
+                <input matInput formControlName="zipcode" type="number" name="zipcode" />
+                <mat-error *ngIf="userUpdateForm.get('zipcode')?.hasError('required')">
+                    Zipcode is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="userUpdateForm.get('zipcode')?.hasError('pattern') &&
+                                        !userUpdateForm.get('zipcode')?.hasError('required')">
+                    Zipcode is in <strong>wrong format</strong>
+                </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field class="last-row-fields">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="gender">
+                    <mat-option *ngFor="let gender of genderOptions" [value]="gender.value">
+                        {{gender.viewValue}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="userUpdateForm.get('gender')?.hasError('required')">
+                    Gender is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+    
+        </div>
+    
+    </form>
+
+    <div class="center-content">
+        <button mat-raised-button color="primary" (click)="update()">Update</button>
+    </div>
+
+</div>

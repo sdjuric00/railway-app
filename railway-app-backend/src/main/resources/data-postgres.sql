@@ -19,7 +19,7 @@ insert into balance_transaction(time_stamp, tokens_num, money_spent, currency, b
 
 insert into regular_user(id, email, password, full_name, gender, balance_account_id, address_id, verified, role_id, social_account) values
     (nextval('users_id_gen'), 'srdjan@gmail.com', '$2y$10$Pc9a5MzNrtCPlBMaJoyITuBc16s/F9oe4vdc78x0kO8cDlZpMB6RC', 'Srdjan Djuric', 1, 1, 1, true, 2, false),
-    (nextval('users_id_gen'), 'srdjandjuric57@gmail.com', null, 'Srdjan Djuric', 1, 2, 3, true, 2, true);
+    (nextval('users_id_gen'), 'srdjandjuric57@gmail.com', null, 'Srdjan Djuric', 0, 2, 3, true, 2, true);
 
 insert into admin(id, email, password, full_name, gender, address_id, verified, role_id, social_account) values
     (nextval('users_id_gen'), 'admin@gmail.com', '$2y$10$Pc9a5MzNrtCPlBMaJoyITuBc16s/F9oe4vdc78x0kO8cDlZpMB6RC', 'Admin Adminovic', 1, 2, true, 1, false);

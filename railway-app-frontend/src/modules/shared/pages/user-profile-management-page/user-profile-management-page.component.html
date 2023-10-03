@@ -1,0 +1,15 @@
+<div class="user-profile-container">
+
+    <div style="flex: 1;">
+        <app-user-profile-update 
+        [userDetailData]="userDetailData"
+        (onUpdateEvent)="update($event)"
+        ></app-user-profile-update>
+    </div>
+    <div style="flex: 1;">
+        <app-user-password-update
+        (onPasswordChange)="updatePasswords($event)"
+        ></app-user-password-update>
+    </div>
+
+</div>

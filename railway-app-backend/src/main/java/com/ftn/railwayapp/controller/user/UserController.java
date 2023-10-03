@@ -1,6 +1,7 @@
 package com.ftn.railwayapp.controller.user;
 
 import com.ftn.railwayapp.exception.EntityNotFoundException;
+import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
 import com.ftn.railwayapp.exception.PasswordsDoNotMatchException;
 import com.ftn.railwayapp.request.user.ChangePasswordRequest;
 import com.ftn.railwayapp.request.user.UserRequest;
@@ -25,6 +26,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_REGULAR')")
+    public UserResponse getById(@PathVariable @NotNull(message = WRONG_ID) Long id) throws EntityNotFoundException {
+
+        return UserResponse.fromUser(userService.getVerifiedUserById(id));
+    }
+
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_REGULAR')")
     public UserResponse update(
@@ -34,7 +42,6 @@ public class UserController {
 
         return this.userService.update(
                 id,
-                userRequest.getEmail(),
                 userRequest.getFullName(),
                 userRequest.getGender(),
                 userRequest.getCity(),
@@ -49,7 +56,7 @@ public class UserController {
     public boolean changePassword(
             @PathVariable @NotNull(message = WRONG_ID) Long id,
             @RequestBody @Valid ChangePasswordRequest changePasswordRequest
-    ) throws PasswordsDoNotMatchException, EntityNotFoundException {
+    ) throws PasswordsDoNotMatchException, EntityNotFoundException, OperationCannotBeCompletedException {
 
         return this.userService.changePassword(
                 id,

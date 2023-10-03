@@ -28,7 +28,7 @@
     </div>
 
     <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="redirectToUserManagementPage()">
             <mat-icon color="primary">edit</mat-icon><span>Edit profile</span>
         </button>
         <button mat-menu-item (click)="logOut()">
