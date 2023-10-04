@@ -1,5 +1,6 @@
 package com.ftn.railwayapp.model.account;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,16 +33,19 @@ public class BalanceTransaction {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="balance_account_id", nullable=false)
+    @JsonIgnore
     private BalanceAccount balanceAccount;
 
-    public BalanceTransaction(LocalDateTime timeStamp,
+    public BalanceTransaction(
                               int tokensNum,
                               int moneySpent,
-                              String currency
+                              String currency,
+                              BalanceAccount balanceAccount
     ) {
-        this.timeStamp = timeStamp;
+        this.timeStamp = LocalDateTime.now();
         this.tokensNum = tokensNum;
         this.moneySpent = moneySpent;
         this.currency = currency;
+        this.balanceAccount = balanceAccount;
     }
 }

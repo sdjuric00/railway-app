@@ -38,6 +38,13 @@ public class Constants {
     public static final int MAX_SECURITY_NUM = 9999;
     public static final int ZERO_FAILED_ATTEMPTS = 0;
 
+    public static final String TRANSACTION_DESCRIPTION = "Buying tokens for SerbianRailways";
+    public static final String PAYMENT_METHOD = "paypal";
+    public static final String PAYMENT_INTENT = "sale";
+    public static final String REDIRECT_URL_CANCEL = "http://localhost:4200/railway-system/regular/payment/status/-1";
+    public static final String REDIRECT_URL_SUCCESS = "http://localhost:4200/serb-uber/regular/payment/process-payment";
+    public static final String PAYPAL_APPROVAL_URL = "approval_url";
+
     public static final int QR_CODE_HEIGHT = 120;
     public static final int QR_CODE_WIDTH = 120;
 

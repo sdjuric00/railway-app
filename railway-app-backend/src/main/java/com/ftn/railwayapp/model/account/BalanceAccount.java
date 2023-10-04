@@ -28,7 +28,7 @@ public class BalanceAccount {
     @Column
     private int totalTokenSpending;
 
-    @OneToMany(mappedBy = "balanceAccount")
+    @OneToMany(mappedBy = "balanceAccount", cascade = CascadeType.ALL)
     private List<BalanceTransaction> transactions = new ArrayList<>();
 
     public BalanceAccount(String accountNum) {

@@ -11,6 +11,8 @@ import { TransactionsHistoryComponent } from './components/transactions-history/
 import { TokenTransactionsPageComponent } from './pages/token-transactions-page/token-transactions-page.component';
 import { AddingPeopleInputsComponent } from './components/adding-people-inputs/adding-people-inputs.component';
 import { TotalPriceCheckComponent } from './components/total-price-check/total-price-check.component';
+import { PaymentStatusComponent } from './pages/payment-status/payment-status.component';
+import { ProcessingPaymentComponent } from './pages/processing-payment/processing-payment.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { TotalPriceCheckComponent } from './components/total-price-check/total-p
     TransactionsHistoryComponent,
     TokenTransactionsPageComponent,
     AddingPeopleInputsComponent,
-    TotalPriceCheckComponent
+    TotalPriceCheckComponent,
+    PaymentStatusComponent,
+    ProcessingPaymentComponent
   ],
   imports: [
     CommonModule,

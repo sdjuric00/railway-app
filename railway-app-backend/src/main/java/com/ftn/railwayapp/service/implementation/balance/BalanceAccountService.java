@@ -5,6 +5,7 @@ import com.ftn.railwayapp.exception.OperationCannotBeCompletedException;
 import com.ftn.railwayapp.model.account.BalanceAccount;
 import com.ftn.railwayapp.repository.balance.BalanceAccountRepository;
 import com.ftn.railwayapp.service.interfaces.IBalanceAccountService;
+import com.ftn.railwayapp.service.interfaces.IBalanceTransactionService;
 import org.springframework.stereotype.Service;
 
 import static com.ftn.railwayapp.util.Helper.generateBalanceAccountNumber;
@@ -15,14 +16,35 @@ public class BalanceAccountService implements IBalanceAccountService {
 
     private final BalanceAccountRepository balanceAccountRepository;
 
-    public BalanceAccountService(BalanceAccountRepository balanceAccountRepository) {
+    private final IBalanceTransactionService balanceTransactionService;
+
+    public BalanceAccountService(BalanceAccountRepository balanceAccountRepository,
+                                 IBalanceTransactionService balanceTransactionService
+    ) {
         this.balanceAccountRepository = balanceAccountRepository;
+        this.balanceTransactionService = balanceTransactionService;
     }
 
     @Override
     public BalanceAccount getBalanceAccountById(Long id) throws EntityNotFoundException {
         return this.balanceAccountRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("balance account"));
+    }
+
+    @Override
+    public boolean updateBalance(Long balanceAccountId,
+                                 int numOfTokens,
+                                 int tokenPrice,
+                                 String currency
+    ) throws EntityNotFoundException {
+        BalanceAccount balanceAccount = getBalanceAccountById(balanceAccountId);
+        balanceAccount.setTokensNum(balanceAccount.getTokensNum() + numOfTokens);
+        balanceAccount.getTransactions().add(
+                this.balanceTransactionService.createTransaction(numOfTokens, numOfTokens*tokenPrice, currency, balanceAccount)
+        );
+
+        this.balanceAccountRepository.save(balanceAccount);
+        return true;
     }
 
     @Override

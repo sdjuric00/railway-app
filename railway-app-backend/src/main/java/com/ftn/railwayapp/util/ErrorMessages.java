@@ -43,5 +43,6 @@ public class ErrorMessages {
 
     //TICKET
     public static final String WRONG_PASSENGERS = "There should be at least one passenger.";
+    public static final String MISSING_NUM_OF_TOKENS = "Number of tokens must be greater than 0.";
 
 }
