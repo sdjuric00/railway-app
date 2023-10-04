@@ -14,4 +14,6 @@ public interface IRegularUserService {
     UserResponse registerRegularUser(String email, String password, String confirmPassword, String fullName, Gender gender, String city, String street, String streetNumber, String zipcode) throws PasswordsDoNotMatchException, EntityAlreadyExistException, IOException, MailCannotBeSentException, EntityNotFoundException;
     boolean activateAccount(String verifyId, int securityCode) throws EntityNotFoundException, WrongVerifyTryException;
     RegularUser getVerifiedRegularUserByEmail(Long id) throws EntityNotFoundException;
+
+    Long getBalanceAccountId(Long id) throws EntityNotFoundException;
 }

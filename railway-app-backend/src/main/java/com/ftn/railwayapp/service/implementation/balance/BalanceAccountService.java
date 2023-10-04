@@ -34,13 +34,13 @@ public class BalanceAccountService implements IBalanceAccountService {
     @Override
     public boolean updateBalance(Long balanceAccountId,
                                  int numOfTokens,
-                                 int tokenPrice,
+                                 int tokensPrice,
                                  String currency
     ) throws EntityNotFoundException {
         BalanceAccount balanceAccount = getBalanceAccountById(balanceAccountId);
         balanceAccount.setTokensNum(balanceAccount.getTokensNum() + numOfTokens);
         balanceAccount.getTransactions().add(
-                this.balanceTransactionService.createTransaction(numOfTokens, numOfTokens*tokenPrice, currency, balanceAccount)
+                this.balanceTransactionService.createTransaction(numOfTokens, tokensPrice, currency, balanceAccount)
         );
 
         this.balanceAccountRepository.save(balanceAccount);

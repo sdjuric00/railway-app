@@ -22,6 +22,10 @@ export class ConfigService {
   REGISTER_REGULAR_USER_URL = `${this.REGULAR_USER_URL}/register`
   ACTIVATE_ACCOUNT_URL = `${this.REGULAR_USER_URL}/activate-account`
 
+  getBalanceAccountId(id: string | null): string {
+    return `${this.REGULAR_USER_URL}/balance-account/${id}`
+  }
+
   ///////////USER//////////
   USER_URL = `${this.API_URL}/user`
 
@@ -66,5 +70,13 @@ export class ConfigService {
   getNumOfSoldTicketsURL(departureId: string): string {
     return `${this.TICKET_URL}/sold/${departureId}`
   }
+
+  ///////////BALANCE ACCOUNT///////////
+  BALANCE_ACCOUNT_URL = `${this.API_URL}/balance-account`
+
+  ///////////////////PAYPAL///////////////////
+  PAYPAL_URL = `${this.API_URL}/paypal`;
+  CREATE_PAYMENT_URL = `${this.PAYPAL_URL}/create-payment`;
+  COMPLETE_PAYMENT_URL = `${this.PAYPAL_URL}/complete-payment`;
 
 }

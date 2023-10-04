@@ -1,0 +1,84 @@
+
+.credit-card:hover {
+    box-shadow: 10px 50px 50px rgba(0, 0, 0, 0.2);
+}
+
+.cards-container {
+    display: flex;
+    background-color: white;
+    border-radius: 1rem;
+    min-height: 30vh;
+}
+
+p {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+hr.vertical {
+    width: 0px;
+    height: 200px;
+    border: 2px solid var(--dark-navy);
+    margin-left: 5%;
+}
+
+.credit-card {
+    flex: 1;
+    width: 300px;
+    max-width: 300px;
+    height: 150px;
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+
+.credit-card.visa .card-front {
+    background-color: #0047AB;
+}
+
+.card-front {
+    color: white;
+    transform: rotateY(0deg);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.card-logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card-chip {
+    margin-top: 10px;
+    width: 60px;
+    height: 40px;
+    background-color: gold;
+    border-radius: 6px;
+}
+
+.card-number {
+    font-size: 20px;
+    font-family: monospace;
+    margin-top: 20px;
+}
+
+.card-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-holder,
+.card-expiry {
+    font-size: 14px;
+}
+
+.card-separator {
+    margin-top: 20px;
+    height: 2px;
+    background-color: white;
+}

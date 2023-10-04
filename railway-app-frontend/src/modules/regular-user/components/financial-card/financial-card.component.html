@@ -1,0 +1,22 @@
+<div class="cards-container">
+    <div class="credit-card visa">
+        <div class="card-front">
+            <div class="card-logo">SerbianRailways</div>
+            <div class="card-chip"></div>
+            <div class="card-number">{{balanceAccount.accountNum}}</div>
+            <div class="card-info">
+                <div class="card-holder">{{loggedUser.email}}</div>
+            </div>
+            <div class="card-separator"></div>
+        </div>
+    </div>
+
+    <div style="display: flex; flex: 1;">
+        <hr class="vertical" />
+        <div style="width: 100%;">
+            <p>Number of tokens: <br>{{balanceAccount.tokensNum}}<mat-icon>payments</mat-icon></p>
+            <p>Tokens spent in app: <br>{{balanceAccount.totalTokenSpending}}<mat-icon>payments</mat-icon></p>
+        </div>
+    </div>
+
+</div>

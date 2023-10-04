@@ -26,7 +26,7 @@ public class PayPalController {
 
     @PostMapping("create-payment")
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAnyRole('ROLE_REGULAR')")
+    @PreAuthorize("hasAuthority('ROLE_REGULAR')")
     public Map<String, String> createPayment(@RequestBody @Valid CreatePaymentRequest createPaymentRequest)
             throws PayPalPaymentException, EntityNotFoundException {
 
@@ -38,7 +38,7 @@ public class PayPalController {
 
     @PostMapping("complete-payment")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyRole('ROLE_REGULAR')")
+    @PreAuthorize("hasAuthority('ROLE_REGULAR')")
     public boolean completePayment(@RequestBody CompletePaymentRequest completePaymentRequest)
             throws PayPalPaymentException, EntityNotFoundException {
 
@@ -46,7 +46,7 @@ public class PayPalController {
                 completePaymentRequest.getPaymentId(),
                 completePaymentRequest.getPayerId(),
                 completePaymentRequest.getNumOfTokens(),
-                completePaymentRequest.getAccountBalanceId()
+                completePaymentRequest.getBalanceAccountId()
         );
     }
 }

@@ -1,10 +1,16 @@
 <div class="financial-card-container">
 
     <div style="flex: 1;">
-        <app-paypal-buying-form></app-paypal-buying-form>
+        <app-financial-card 
+        [balanceAccount]="balanceAccount"
+        [loggedUser]="loggedUser"
+        ></app-financial-card>
+        <app-paypal-buying-form (onBuyTokens)="buyTokens($event)"></app-paypal-buying-form>
     </div>
     <div style="flex: 1;">
-        <app-transactions-history></app-transactions-history>
+        <app-transactions-history 
+        [transactions]="balanceAccount.transactions"
+        ></app-transactions-history>
     </div>
 
 </div>

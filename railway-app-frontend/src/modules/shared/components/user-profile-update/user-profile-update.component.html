@@ -69,7 +69,7 @@
     
             <mat-form-field class="last-row-fields" appearance="fill">
                 <mat-label>Zipcode</mat-label>
-                <input matInput formControlName="zipcode" type="number" name="zipcode" />
+                <input matInput formControlName="zipcode" type="text" name="zipcode" />
                 <mat-error *ngIf="userUpdateForm.get('zipcode')?.hasError('required')">
                     Zipcode is <strong>required</strong>
                 </mat-error>

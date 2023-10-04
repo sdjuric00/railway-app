@@ -1,0 +1,16 @@
+
+.transaction-history-container {
+    background-color: white;
+    border-radius: 1rem;
+    min-height: 67vh;
+    overflow-y: auto;
+
+    h1 {
+        font-size: 1.7rem;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+}

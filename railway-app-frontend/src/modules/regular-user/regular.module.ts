@@ -13,6 +13,8 @@ import { AddingPeopleInputsComponent } from './components/adding-people-inputs/a
 import { TotalPriceCheckComponent } from './components/total-price-check/total-price-check.component';
 import { PaymentStatusComponent } from './pages/payment-status/payment-status.component';
 import { ProcessingPaymentComponent } from './pages/processing-payment/processing-payment.component';
+import { FinancialCardComponent } from './components/financial-card/financial-card.component';
+import { TransactionRowComponent } from './components/transaction-row/transaction-row.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ProcessingPaymentComponent } from './pages/processing-payment/processin
     AddingPeopleInputsComponent,
     TotalPriceCheckComponent,
     PaymentStatusComponent,
-    ProcessingPaymentComponent
+    ProcessingPaymentComponent,
+    FinancialCardComponent,
+    TransactionRowComponent
   ],
   imports: [
     CommonModule,

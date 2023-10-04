@@ -56,7 +56,7 @@ public class PayPalService implements IPayPalService {
             final String paymentId,
             final String payerId,
             final int numOfTokens,
-            final Long tokenBankId
+            final Long balanceAccountId
     )
             throws PayPalPaymentException, EntityNotFoundException {
         Payment payment = new Payment();
@@ -65,7 +65,7 @@ public class PayPalService implements IPayPalService {
         PaymentExecution paymentExecution = new PaymentExecution();
         paymentExecution.setPayerId(payerId);
 
-        return createCompletePaymentResponse(payment, paymentExecution, numOfTokens, tokenBankId);
+        return createCompletePaymentResponse(payment, paymentExecution, numOfTokens, balanceAccountId);
     }
 
     private Amount createAmount(final int numOfTokens) {

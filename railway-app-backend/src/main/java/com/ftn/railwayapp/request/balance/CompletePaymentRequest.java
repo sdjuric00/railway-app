@@ -28,6 +28,6 @@ public class CompletePaymentRequest {
     private int numOfTokens;
 
     @NotNull(message = WRONG_ID)
-    private Long accountBalanceId;
+    private Long balanceAccountId;
 
 }

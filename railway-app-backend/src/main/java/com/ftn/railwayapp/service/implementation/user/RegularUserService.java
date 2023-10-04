@@ -56,6 +56,13 @@ public class RegularUserService implements IRegularUserService {
     }
 
     @Override
+    public Long getBalanceAccountId(Long userId) throws EntityNotFoundException {
+
+        return this.regularUserRepository.getBalanceAccountId(userId)
+                .orElseThrow(() -> new EntityNotFoundException("balance account"));
+    }
+
+    @Override
     public UserResponse socialRegistration(String email, String fullName) throws EntityNotFoundException {
         Address address = new Address(NOT_PROVIDED_STRING, NOT_PROVIDED_STRING, NOT_PROVIDED_STRING, NOT_PROVIDED_STRING);
         BalanceAccount balanceAccount = balanceAccountService.createBalanceAccount();

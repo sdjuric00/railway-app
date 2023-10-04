@@ -1,1 +1,12 @@
-<p>transactions-history works!</p>
+<div class="transaction-history-container">
+    <br>
+    <h1 class="center-content">Transactions history</h1>
+
+    <div *ngFor="let transaction of transactions; let i = index">
+        <app-transaction-row [transaction]="transaction" [index]="i"></app-transaction-row>
+    </div>
+    
+    <div class="center-content" *ngIf="transactions.length === 0">
+        <p>No transactions yet</p>
+    </div>
+</div>

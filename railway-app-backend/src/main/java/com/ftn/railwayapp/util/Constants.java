@@ -42,7 +42,7 @@ public class Constants {
     public static final String PAYMENT_METHOD = "paypal";
     public static final String PAYMENT_INTENT = "sale";
     public static final String REDIRECT_URL_CANCEL = "http://localhost:4200/railway-system/regular/payment/status/-1";
-    public static final String REDIRECT_URL_SUCCESS = "http://localhost:4200/serb-uber/regular/payment/process-payment";
+    public static final String REDIRECT_URL_SUCCESS = "http://localhost:4200/railway-system/regular/payment/process-payment";
     public static final String PAYPAL_APPROVAL_URL = "approval_url";
 
     public static final int QR_CODE_HEIGHT = 120;

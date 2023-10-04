@@ -25,7 +25,7 @@ public class BalanceAccountController {
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasRole('ROLE_REGULAR')")
+    @PreAuthorize("hasAuthority('ROLE_REGULAR')")
     public BalanceAccountResponse getByUserId(@PathVariable @Valid @NotNull(message = WRONG_ID) Long id) throws EntityNotFoundException {
 
         return BalanceAccountResponse.fromBalanceAccount(

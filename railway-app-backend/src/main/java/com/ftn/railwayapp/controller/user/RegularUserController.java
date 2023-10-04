@@ -6,11 +6,15 @@ import com.ftn.railwayapp.request.user.VerifyRequest;
 import com.ftn.railwayapp.response.user.UserResponse;
 import com.ftn.railwayapp.service.interfaces.IRegularUserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+
+import static com.ftn.railwayapp.util.ErrorMessages.WRONG_ID;
 
 
 @RestController
@@ -22,6 +26,16 @@ public class RegularUserController {
 
     public RegularUserController(IRegularUserService regularUserService) {
         this.regularUserService = regularUserService;
+    }
+
+    @GetMapping("/balance-account/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ROLE_REGULAR')")
+    public Long getBalanceAccountId(@PathVariable @Valid @NotNull(message = WRONG_ID) Long id)
+            throws EntityNotFoundException
+    {
+
+        return this.regularUserService.getBalanceAccountId(id);
     }
 
     @PostMapping(path="register")

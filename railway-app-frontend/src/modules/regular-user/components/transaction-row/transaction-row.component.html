@@ -1,0 +1,8 @@
+<div class="transaction-row">
+    <table width="100%">
+        <td width="10%">{{index + 1}}.</td>
+        <td width="30%">-${{transaction.moneySpent}}</td>
+        <td width="30%">+{{index}}<mat-icon>payments</mat-icon></td>
+        <td width="30%">{{transaction.timeStamp.split('T')[0]}}</td>
+    </table>
+</div>

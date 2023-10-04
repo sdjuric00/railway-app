@@ -1,1 +1,28 @@
-<p>payment-status works!</p>
+<div class="status-containet">
+    <div *ngIf="showSuccess; else failedTransactionBlock">
+        <div class="center-content">
+            <img src="../../../../assets/images/verified.png">
+        </div>
+        <h1 class="center-content">Transaction successfull</h1>
+        <div class="center-content main-content">
+            <p>Transaction is successfully completed.</p>
+            <p>You can go and spend tokens right now!</p>
+        </div>
+    
+    </div>
+    <ng-template #failedTransactionBlock>
+        <div class="center-content">
+            <img src="../../../../assets/images/failed.png">
+        </div>
+        <h1 class="center-content">Transaction failed</h1>
+        <div class="center-content main-content">
+            <p>Transaction is is not completed.</p>
+            <p>Please check your balance on PayPal account.</p>
+        </div>
+    
+    </ng-template>
+    <div class="center-content">
+        <button color="primary" mat-raised-button (click)="goToBalance()">Go back to balance</button>
+    </div>
+    <p class="center-content footer">Thank you for using SerbianRailways.</p>
+</div>

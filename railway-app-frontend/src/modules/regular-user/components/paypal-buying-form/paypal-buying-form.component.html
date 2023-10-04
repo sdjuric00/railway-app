@@ -1,1 +1,21 @@
-<p>paypal-buying-form works!</p>
+<div class="buying-form-container">
+    <p>Calculate prices per quantity here.<br>Price per token is ${{pricePerToken}}.</p>
+    <div>
+        <form color="primary" [formGroup]="tokenForm">
+            <mat-form-field class="token-input" appearance="fill">
+                <mat-label>Tokens</mat-label>
+                <input formControlName="numOfTokens" type="number" matInput>
+                <mat-error *ngIf="tokenForm.get('numOfTokens')?.invalid">
+                    Nummber of tokens must be positive number
+                </mat-error>
+            </mat-form-field>
+            <mat-icon>arrow_forward</mat-icon>
+            <p>${{calculateValue()}}</p>
+        </form>
+    </div>
+    <button class="paypal-button" (click)="buyTokens()">
+        <span class="paypal-logo">
+            <i class="pay">Pay</i><i class="pal">Pal</i>
+        </span>
+    </button>
+</div>
