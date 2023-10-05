@@ -28,4 +28,10 @@ public interface IDepartureService {
             throws OperationCannotBeCompletedException;
 
     void checkDepartureInThePast(LocalDateTime startTime) throws InvalidTimeException;
+
+    List<String> getDepartureIdsForFuture5Hours();
+
+    void delayDeparture(String id) throws EntityNotFoundException;
+
+    void cancelDeparture(String id) throws EntityNotFoundException;
 }

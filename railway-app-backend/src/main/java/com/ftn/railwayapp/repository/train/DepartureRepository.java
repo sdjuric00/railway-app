@@ -15,4 +15,7 @@ public interface DepartureRepository extends MongoRepository<Departure, String> 
 
     @Query("{ 'startTime': { $gte: ?0, $lte: ?1 }, 'train': {$in: ?2}}")
     Page<Departure> filterDepartures(LocalDateTime startTime, LocalDateTime endTime, List<String> trainIDs, Pageable pageable);
+
+    @Query(value = "{ 'startTime' : { $gte: ?0, $lte: ?1 } }", fields = "{'id': 1}")
+    List<String> getDepartureIdsForFuture5Hours(LocalDateTime now, LocalDateTime plusHours);
 }

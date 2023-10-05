@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static com.ftn.railwayapp.util.Constants.DELAYED_MINUTES;
 import static com.ftn.railwayapp.util.Helper.checkStartTimeAfterCurrent;
 
 @Service
@@ -117,6 +118,26 @@ public class DepartureService implements IDepartureService {
         if (startTime.isBefore(LocalDateTime.now())) {
             throw new InvalidTimeException("Departure is in the past");
         }
+    }
+
+    @Override
+    public List<String> getDepartureIdsForFuture5Hours() {
+
+        return this.departureRepository.getDepartureIdsForFuture5Hours(LocalDateTime.now(), LocalDateTime.now().plusHours(5));
+    }
+
+    @Override
+    public void delayDeparture(String id) throws EntityNotFoundException {
+        Departure departure = getById(id);
+        departure.setDelayedMinutes(DELAYED_MINUTES);
+        this.departureRepository.save(departure);
+    }
+
+    @Override
+    public void cancelDeparture(String id) throws EntityNotFoundException {
+        Departure departure = getById(id);
+        departure.setCancelled(true);
+        this.departureRepository.save(departure);
     }
 
     @Override
