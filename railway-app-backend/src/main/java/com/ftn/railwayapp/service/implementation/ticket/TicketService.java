@@ -67,6 +67,7 @@ public class TicketService implements ITicketService {
         int price = passengers.size() * (destinationDeparture.getPrice() - (startingDeparture.isStartingStation() ? 0 : destinationDeparture.getDiscountIfNotStarting()));
 
         departureService.checkDepartureInThePast(departure.getStartTime());
+        departureService.checkDepartureIsCancelled(departure.isCancelled());
         departureService.checkStationsOrder(startingDeparture.getStationOrder(), destinationDeparture.getStationOrder());
         balanceAccountService.createTransaction(price, ((RegularUser)regularUser).getBalanceAccount().getId());
 

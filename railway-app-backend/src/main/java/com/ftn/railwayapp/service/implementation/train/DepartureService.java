@@ -155,6 +155,13 @@ public class DepartureService implements IDepartureService {
     }
 
     @Override
+    public void checkDepartureIsCancelled(boolean cancelled) throws OperationCannotBeCompletedException {
+        if (cancelled) {
+            throw new OperationCannotBeCompletedException("You cannot buy tickets for cancelled departure.");
+        }
+    }
+
+    @Override
     public void checkStationsOrder(int startingStationOrder, int destinationStationOrder) throws OperationCannotBeCompletedException {
         if (startingStationOrder >= destinationStationOrder) {
             throw new OperationCannotBeCompletedException("Station is not valid.");

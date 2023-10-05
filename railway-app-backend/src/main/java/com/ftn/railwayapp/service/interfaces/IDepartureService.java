@@ -34,4 +34,6 @@ public interface IDepartureService {
     void delayDeparture(String id) throws EntityNotFoundException;
 
     void cancelDeparture(String id) throws EntityNotFoundException;
+
+    void checkDepartureIsCancelled(boolean cancelled) throws OperationCannotBeCompletedException;
 }
