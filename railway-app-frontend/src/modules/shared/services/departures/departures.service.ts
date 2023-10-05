@@ -3,7 +3,7 @@ import { ConfigService } from '../config/config.service';
 import { HttpClient } from '@angular/common/http';
 import { DepartureSearch, SearchRequest } from '../../model/search';
 import { Observable } from 'rxjs';
-import { DepartureDetails } from '../../model/departure';
+import { DepartureDetails, DepartureRequest } from '../../model/departure';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,13 @@ export class DeparturesService {
     return this.http.get<DepartureDetails>(
       this.configService.getDepartureDetailsURL(departureId, startingStationId, destinationStationId)
     );
+  }
+
+  createDeparture(departureRequest: DepartureRequest) {
+    return this.http.post(
+      this.configService.DEPARTURE_URL,
+      departureRequest
+    )
   }
 
 }

@@ -31,3 +31,20 @@ export interface DepartureDetails {
     allStations: StationDeparture[],
     totalNumOfSeats: number
 }
+
+export interface StationDepartureRequest {
+    station?: Station,
+    stationId: string,
+    startingStation: boolean,
+    price: number,
+    discountIfNotStarting: number,
+    stationOrder: number,
+    leavingTime: string
+}
+
+export interface DepartureRequest {
+    startTime: string,
+    durationInMinutes: string,
+    trainId: string,
+    stationDepartures: StationDepartureRequest[]
+}

@@ -67,7 +67,7 @@ public class DepartureService implements IDepartureService {
         checkFilteringParameters(trainType, startTime);
 
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by("startTime").ascending());
-        LocalDateTime endOfDay = LocalDateTime.now().with(LocalTime.MAX);
+        LocalDateTime endOfDay = startTime.with(LocalTime.MAX);
         List<String> validTrainsIDs = this.trainService.findTrainsByType(trainType)
                 .stream().map(Train::getId).toList();
 

@@ -1,0 +1,63 @@
+<div class="station-departures-container">
+    
+    <h2>Station departure</h2>
+    <div class="inner-container">
+        <form color="primary" [formGroup]="stationDepartureForm">
+            <div>
+                <mat-form-field class="long-field">
+                    <mat-label>Station</mat-label>
+                    <input type="text" placeholder="Station" matInput formControlName="stationName" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option (click)="selectStation(station)" *ngFor="let station of filteredStations | async" [value]="station.name">
+                            {{station.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="stationDepartureForm.get('stationId')?.hasError('required')">
+                        Station is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field class="short-field" appearance="fill">
+                    <mat-label>Leaving Time</mat-label>
+                    <input matInput formControlName="leavingTime" type="text" name="leavingTime" />
+                    <mat-error *ngIf="stationDepartureForm.get('leavingTime')?.hasError('required')">
+                        Leaving time is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div>
+
+                <mat-form-field class="short-field" appearance="fill">
+                    <mat-label>Price</mat-label>
+                    <input matInput formControlName="price" type="number" name="price" />
+                    <mat-error *ngIf="stationDepartureForm.get('price')?.invalid">
+                        Price is <strong>required</strong> 
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="short-field" appearance="fill">
+                    <mat-label>Discount</mat-label>
+                    <input matInput formControlName="discountIfNotStarting" type="number" name="discountIfNotStarting" />
+                    <mat-error *ngIf="stationDepartureForm.get('discountIfNotStarting')?.hasError('required')">
+                        Discount is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="short-field" appearance="fill">
+                    <mat-label>St. Order</mat-label>
+                    <input matInput formControlName="stationOrder" type="number" name="stationOrder" />
+                    <mat-error *ngIf="stationDepartureForm.get('stationOrder')?.invalid">
+                        Station order is <strong>required</strong>(1-6)
+                    </mat-error>
+                </mat-form-field>
+                
+            </div>
+            <mat-checkbox color="primary" formControlName="startingStation">This station is starting station</mat-checkbox>
+        </form>
+    </div>
+    
+    <button mat-raised-button (click)="openDialog()">Show added</button>
+    <button mat-raised-button color="primary" class="add-btn" (click)="add()">Add</button>
+
+</div>

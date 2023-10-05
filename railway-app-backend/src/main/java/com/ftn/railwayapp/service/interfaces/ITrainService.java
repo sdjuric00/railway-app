@@ -15,4 +15,6 @@ public interface ITrainService {
     List<Train> findTrainsByType(String trainType);
 
     int getTotalNumOfSeats(String trainId) throws EntityNotFoundException;
+
+    List<TrainResponse> getAllTrains();
 }

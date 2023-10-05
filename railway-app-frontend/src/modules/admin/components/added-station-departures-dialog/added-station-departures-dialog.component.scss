@@ -1,0 +1,39 @@
+
+.dialog-container {
+    min-height: 60vh;
+    min-width: 40vw;
+    position: relative;
+
+    .reset-btn {
+        background-color: red;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+        margin-top: 4%;
+        margin-bottom: 5%;
+        font-weight: bold;
+    }
+
+    p, td {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    table {
+        margin-left: 15%;
+        width: 60%;
+    }
+
+    .buttons {
+        position: absolute;
+        bottom: 5%;
+        right: 5%;
+    }
+
+    button.close-btn {
+        right: 15%;
+    }
+
+
+}

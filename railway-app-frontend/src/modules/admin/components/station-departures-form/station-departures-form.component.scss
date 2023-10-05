@@ -1,0 +1,35 @@
+
+.station-departures-container {
+
+    background-color: var(--gray);
+    margin: 2% 20%;
+    border-radius: 1rem;
+    position: relative;
+
+    mat-form-field.long-field {
+        width: 35%;
+        margin-left: -1rem;
+    }
+    
+    mat-form-field.short-field {
+        width: 22%;
+    }
+
+    mat-form-field {
+        margin-left: 2rem;
+    }
+
+    mat-checkbox {
+        position: absolute;
+        left: 10%;
+    }
+
+    button {
+        margin-bottom: 2%;
+        margin-top: 7%;
+    }
+
+    button.add-btn {
+        margin-left: 2rem;
+    }
+}

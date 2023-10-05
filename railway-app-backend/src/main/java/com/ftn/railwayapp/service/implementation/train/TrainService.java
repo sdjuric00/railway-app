@@ -70,6 +70,13 @@ public class TrainService implements ITrainService {
         return totalNumOfSeats;
     }
 
+    @Override
+    public List<TrainResponse> getAllTrains() {
+
+        return this.trainRepository.findAll().stream().map(TrainResponse::fromTrain)
+                .collect(Collectors.toList());
+    }
+
     private List<TrainType> parseToTrainType(String trainType) {
         List<TrainType> trainTypes = new ArrayList<>();
         switch (trainType.toUpperCase(Locale.ROOT)) {

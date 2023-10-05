@@ -1,0 +1,36 @@
+
+.form-container {
+   margin: 2% 20%;
+   background-color: var(--lightest-slate);
+   border: 3px solid var(--light-slate);
+   border-radius: 1rem;
+
+   .inner-container {
+    margin-top: 2%;
+   }
+
+   h1 {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-bottom: 3%;
+   }
+
+   mat-form-field.long-field {
+    width: 25%;
+   }
+
+   mat-form-field.short-field {
+       width: 15%;
+   }
+
+   mat-icon.left-icon {
+    margin-left: 3rem;
+   }
+
+   .create-button {
+    margin-top: 1%;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+   }
+
+}

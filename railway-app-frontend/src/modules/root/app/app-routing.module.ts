@@ -22,6 +22,11 @@ const routes: Routes = [
         loadChildren: () => 
           import("./../../regular-user/regular.module").then((m) => m.RegularModule)
       },
+      {
+        path: "admin",
+        loadChildren: () => 
+          import("./../../admin/admin.module").then((m) => m.AdminModule)
+      }
     ],
   },
   {

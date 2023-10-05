@@ -1,0 +1,18 @@
+<div class="dialog-container center-content">
+
+    <h2>Added station departures</h2>
+    <table *ngFor="let sd of data; let i=index">
+        <td [width]="10">{{i+1}}.</td>
+        <td [width]="40">{{sd.leavingTime}}</td>
+        <td [width]="50">{{sd.station?.name}}</td>
+    </table>
+    <div *ngIf="data.length === 0">
+        <p>Station departures are not added yet.</p>
+    </div>
+
+    <div class="buttons">
+        <button mat-raised-button class="close-btn" [mat-dialog-close]="false">Close</button>
+        <button mat-raised-button class="reset-btn" [mat-dialog-close]="true">Reset</button>
+    </div>
+
+</div>

@@ -50,6 +50,10 @@ export class ConfigService {
   STATION_URL = `${this.API_URL}/station`
   ALL_STATIONS_URL = `${this.STATION_URL}/get-all`
 
+  ////////////TRAIN/////////////
+  TRAIN_URL = `${this.API_URL}/train`
+  ALL_TRAINS_URL = `${this.TRAIN_URL}/all`
+
   ///////////DEPARTURE///////////
   DEPARTURE_URL = `${this.API_URL}/departure`
 
