@@ -12,6 +12,7 @@ import com.ftn.railwayapp.request.train.StationDepartureRequest;
 import com.ftn.railwayapp.response.train.DepartureDetailsResponse;
 import com.ftn.railwayapp.response.train.DepartureResponse;
 import com.ftn.railwayapp.response.train.DepartureSearchResponse;
+import com.ftn.railwayapp.service.implementation.websocket.WebSocketService;
 import com.ftn.railwayapp.service.interfaces.IDepartureService;
 import com.ftn.railwayapp.service.interfaces.IStationService;
 import com.ftn.railwayapp.service.interfaces.ITrainService;
@@ -36,13 +37,16 @@ public class DepartureService implements IDepartureService {
 
     private final IStationService stationService;
 
+    private final WebSocketService webSocketService;
+
     public DepartureService(DepartureRepository departureRepository,
                             ITrainService trainService,
-                            IStationService stationService
-    ) {
+                            IStationService stationService,
+                            WebSocketService webSocketService) {
         this.departureRepository = departureRepository;
         this.trainService = trainService;
         this.stationService = stationService;
+        this.webSocketService = webSocketService;
     }
 
     @Override
@@ -130,14 +134,24 @@ public class DepartureService implements IDepartureService {
     public void delayDeparture(String id) throws EntityNotFoundException {
         Departure departure = getById(id);
         departure.setDelayedMinutes(DELAYED_MINUTES);
+        List<StationDeparture> stationDepartures = departure.getStationDepartures();
+
         this.departureRepository.save(departure);
+        this.webSocketService.sendNotification(String.format(
+                "Departure %s-%s is delayed %d minutes", stationDepartures.get(0).getStation().getName(), stationDepartures.get(stationDepartures.size() - 1).getStation().getName(), DELAYED_MINUTES
+        ));
     }
 
     @Override
     public void cancelDeparture(String id) throws EntityNotFoundException {
         Departure departure = getById(id);
         departure.setCancelled(true);
+        List<StationDeparture> stationDepartures = departure.getStationDepartures();
+
         this.departureRepository.save(departure);
+        this.webSocketService.sendNotification(String.format(
+                "Departure %s-%s is cancelled, please contact our support for more information.", stationDepartures.get(0).getStation().getName(), stationDepartures.get(stationDepartures.size() - 1).getStation().getName())
+        );
     }
 
     @Override

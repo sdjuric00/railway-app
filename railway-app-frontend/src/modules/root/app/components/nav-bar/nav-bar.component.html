@@ -21,11 +21,20 @@
     <a *ngIf="!loggedUser" [routerLink]="['/railway-system/auth/register']" routerLinkActive="active" mat-raised-button
         class="button-link a-sign-up">Sign up</a>
     
-    <!-- Mat menu when logged in-->
+    <!--Notification bell-->
+    <div *ngIf="loggedUser" class="bell-icon" mat-button [matMenuTriggerFor]="bellNotificationsMenu"
+        (click)="setAllAsSeen()">
+        <mat-icon>notifications</mat-icon>
+        <div *ngIf="numOfNotifications > 0" class="badge">
+            <span>{{numOfNotifications}}</span>
+        </div>
+    </div>
+
+    <!-- Mat menu when logged in -->
     <div *ngIf="loggedUser" class="temp">
         <mat-icon class="mat-menu-icon" mat-button
         [matMenuTriggerFor]="menu">account_circle</mat-icon>
-    </div>
+    </div> 
 
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="redirectToUserManagementPage()">
@@ -35,5 +44,23 @@
             <mat-icon color="primary">logout</mat-icon><span>Log out</span>
         </button>
     </mat-menu>
+
+    <mat-menu class="bell-notifications-menu" #bellNotificationsMenu="matMenu">
+        <div *ngFor="let notification of bellNotifications; index as i" class="notification-content">
+            <div class="notification-row">
+                <div>
+                    {{notification.timeStamp.split('T')[0]}}
+                </div>
+                <div>
+                    {{notification.message}}
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div *ngIf="bellNotifications.length < 1" class="notification-content">
+            Your inbox is empty.
+        </div>
+    </mat-menu>
+
 
 </mat-toolbar>

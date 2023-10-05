@@ -11,6 +11,7 @@ import {
   SocialUser,
 } from '@abacritt/angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
+import { WebsocketService } from 'src/modules/root/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-login-form',
@@ -32,7 +33,8 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, 
               private router: Router,
               private socialAuthService: SocialAuthService,
-              private toastr: ToastrService
+              private toastr: ToastrService,
+              private webSocketService: WebsocketService
   ) {
     this.hide = true
     this.socialUser = null
@@ -59,6 +61,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         this.authSubscription = this.authService.login(loginRequest).subscribe(
         userResponse => {
           this.authService.setLocalStorage(userResponse);
+          this.webSocketService.connect()
           this.router.navigate(['/railway-system/shared/departures-timetable'])
         },
         error => {
@@ -73,6 +76,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       userResponse => {
         if (userResponse) {
           this.authService.setLocalStorage(userResponse);
+          this.webSocketService.connect()
           this.router.navigate(['/railway-system/shared/departures-timetable'])
         }
       },

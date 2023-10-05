@@ -57,3 +57,62 @@ a {
     transform: scale(1.5);
     margin-right: 1rem;
 }
+
+.bell-icon {
+    margin-right: 1rem;
+    position: relative;
+}
+
+.bell-icon mat-icon {
+    color: white;
+    margin-top: 0.5rem;
+    transform: scale(1.1);
+    vertical-align: middle;
+}
+
+.notification-content {
+    margin: 0.5rem;
+    padding: 0.2rem;
+    min-height: 2rem;
+    color: var(--lightest-navy);
+}
+
+::ng-deep .bell-notifications-menu {
+    max-height: 18rem !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.notification-row {
+    border-radius: 0.4rem;
+    padding: 0.2rem;
+    cursor: pointer;
+}
+
+.notification-row:hover {
+    background-color: var(--lightest-slate);
+}
+
+.badge {
+    box-sizing: border-box;
+    position: absolute;
+    min-width: 1.4rem;
+    min-height: 1.4rem;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 0.125rem;
+    border-radius: 1rem;
+
+    top: 0;
+    left: 0.8rem;
+    background: var(--gray);
+    color: var(--lightest-navy);
+    font-weight: bold;
+}
+
+.badge span {
+    position: relative;
+    top: -0.4rem;
+}

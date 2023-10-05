@@ -38,8 +38,6 @@ def show_simulation_input_form():
             for index, departure in enumerate(departure_ids):
                 process_departure(index, json.loads(departure))
 
-                time.sleep(5)  # Wait for 30 seconds before processing the next departure
-                continue
         elif user_input.lower() == "quit":
             print("Quitting...")
             exit(0)
@@ -49,5 +47,5 @@ def show_simulation_input_form():
 if __name__ == '__main__':
     for message in consumer:
         departure_ids = message.value
-        print(f"Processed departure IDs: {departure_ids}")
+        print(f"Received departure IDs: {departure_ids}")
         show_simulation_input_form()
