@@ -14,7 +14,7 @@ insert into balance_account(account_num, tokens_num, total_token_spending) value
     ('1230027890345', 0, 0);
 
 insert into balance_transaction(time_stamp, tokens_num, money_spent, currency, balance_account_id) values
-     ('2023-07-01', 2, 2, 'USD', 1),
+     ('2023-07-01', 198, 198, 'USD', 1),
      ('2023-07-03', 2, 2, 'USD', 1);
 
 insert into regular_user(id, email, password, full_name, gender, balance_account_id, address_id, verified, role_id, social_account) values

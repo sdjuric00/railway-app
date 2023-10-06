@@ -18,6 +18,9 @@
 ## 👨‍💻 Developer
     • Srđan Đurić           SW63-2019
 
+## 🏗️ Application architecture
+![Architecture](./diagrams/communication-architecture.png)
+
 ## 🚀 Project setup
 
 #### <span style="vertical-align: middle">:warning:</span> *Pre requirements:*
@@ -97,4 +100,12 @@ since it's running in testing environment
 - Apache Kafka: https://kafka.apache.org/
 - Srđan Đurić: https://www.linkedin.com/in/srdjan-djuric/
 
-
+## 📱 Some photos of application
+![LogIn page](./railway-app-frontend/src/assets/app-images/LogIn.png)
+![Registration page](./railway-app-frontend/src/assets/app-images/Registration.png)
+![Vegistration page](./railway-app-frontend/src/assets/app-images/Verification.png)
+![Toke transactions page](./railway-app-frontend/src/assets/app-images/Transactions.png)
+![Departures page](./railway-app-frontend/src/assets/app-images/Timetable.png)
+![Departure details page](./railway-app-frontend/src/assets/app-images/Details.png)
+![Ticket buying dialog](./railway-app-frontend/src/assets/app-images/Ticket.png)
+![PDF Boarding Ticket](./railway-app-frontend/src/assets/app-images/Pdf.png)
