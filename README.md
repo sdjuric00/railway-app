@@ -46,11 +46,10 @@
 - Open angular-app in wanted IDE (VSCode, WebStorm etc.)
 - Run npm install in terminal to install all needed dependencies
 - Run ng serve in terminal to start application
-
 #### <span style="vertical-align: middle">:floppy_disk:</span> *How to run python script:*
-
 - pip install python-kafka
 - click on run button in IDE
+
 <br>
 
 ## 🤝 Useful to know:
