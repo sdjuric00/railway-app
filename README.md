@@ -48,6 +48,12 @@
 - Run ng serve in terminal to start application
 <br>
 
+#### <span style="vertical-align: middle">:floppy_disk:</span> *How to run python script:*
+
+- pip install python-kafka
+- click on run button in IDE
+<br>
+
 ## 🤝 Useful to know:
 - Railway application is using Leaflet maps and many other APIs, stable internet connection is needed
 - You will need to reconfigure API keys for login with Google/Microsoft and paying via PayPal
@@ -88,6 +94,8 @@ since it's running in testing environment
         - regular (components used only by regular users)
         - root (starting point for frontend)
         - shared (components used by multiple user roles, interceptors etc.)
+- Python Script
+    - Simulates train delayes and cancellations in real time through Kafka  
 * Note* All user based elements are consisting of pages, components and services
 
 
