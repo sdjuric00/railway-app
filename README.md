@@ -112,6 +112,6 @@ since it's running in testing environment
 ![Vegistration page](./railway-app-frontend/src/assets/app-images/Verification.png)
 ![Toke transactions page](./railway-app-frontend/src/assets/app-images/Transactions.png)
 ![Departures page](./railway-app-frontend/src/assets/app-images/Timetable.png)
-![Departure details page](./railway-app-frontend/src/assets/app-images/Details.png)
-![Ticket buying dialog](./railway-app-frontend/src/assets/app-images/Ticket.png)
+![Departure details page](./railway-app-frontend/src/assets/app-images/Details1.png)
+![Ticket buying dialog](./railway-app-frontend/src/assets/app-images/Ticket1.png)
 ![PDF Boarding Ticket](./railway-app-frontend/src/assets/app-images/Pdf.png)
