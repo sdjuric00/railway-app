@@ -52,6 +52,7 @@ export class AuthService {
   logOut(): void {
     this.currentUser$.next(null);
     localStorage.clear()
+    sessionStorage.clear()
   }
 
 }

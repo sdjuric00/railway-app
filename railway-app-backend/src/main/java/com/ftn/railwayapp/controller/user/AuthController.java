@@ -35,7 +35,7 @@ public class AuthController {
 
     @PostMapping(path="social-login")
     @ResponseStatus(HttpStatus.OK)
-    public LoginResponse googleLogin(@Valid @RequestBody @NotBlank(message = INVALID_SOCIAL_TOKEN) String token)
+    public LoginResponse socialLogin(@Valid @RequestBody @NotBlank(message = INVALID_SOCIAL_TOKEN) String token)
             throws InvalidSocialTokenException, EntityNotFoundException, InvalidCredentialsException {
 
         return authService.onSocialLogin(token);

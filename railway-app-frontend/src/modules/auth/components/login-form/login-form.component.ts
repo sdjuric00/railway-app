@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { LoginRequest } from 'src/modules/shared/model/login-request';
 import { Router } from '@angular/router';
 import {
-  GoogleLoginProvider,
   MicrosoftLoginProvider,
   SocialAuthService,
   SocialUser,
@@ -24,6 +23,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   socialUser: SocialUser | null
 
   authSubscription: Subscription
+  initialized: boolean
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required ]),
@@ -38,13 +38,14 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   ) {
     this.hide = true
     this.socialUser = null
+    this.initialized = false
   }
 
   ngOnInit(): void {
-      this.socialAuthService.authState.subscribe((user) => {
-        this.socialUser = user;
-        if (this.socialUser) {this.onSocialLogin(this.socialUser.idToken);}
-      });
+    this.socialAuthService.authState.subscribe((user) => {
+      this.socialUser = user;
+      if (this.socialUser) {this.onSocialLogin(this.socialUser.idToken);}
+    });
   }
 
   logIn(): void {
@@ -62,6 +63,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         userResponse => {
           this.authService.setLocalStorage(userResponse);
           this.webSocketService.connect()
+          this.socialAuthService.signOut()
           this.router.navigate(['/railway-system/shared/departures-timetable'])
         },
         error => {
@@ -72,18 +74,21 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   onSocialLogin(tokenId: string): void {
-    this.authService.onSocialLogin(tokenId).subscribe(
-      userResponse => {
-        if (userResponse) {
-          this.authService.setLocalStorage(userResponse);
-          this.webSocketService.connect()
-          this.router.navigate(['/railway-system/shared/departures-timetable'])
+    if (tokenId && !this.initialized) {
+      this.authService.onSocialLogin(tokenId).subscribe(
+        userResponse => {
+          if (userResponse) {
+            this.initialized = true
+            this.authService.setLocalStorage(userResponse);
+            this.webSocketService.connect()
+            this.router.navigate(['/railway-system/shared/departures-timetable'])
+          }
+        },
+        err => {
+          this.toastr.error(err.error, 'Error happened.')
         }
-      },
-      err => {
-        this.toastr.error(err.error, 'Error happened.')
-      }
-    )
+      )
+    }
   }
 
   signInWithMicrosoft(): void {
@@ -98,6 +103,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       if (this.socialUser) {
         this.socialAuthService.signOut()
         this.socialUser = null
+        this.initialized = false
       }
   }
 

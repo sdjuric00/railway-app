@@ -68,7 +68,7 @@ public class RegularUserService implements IRegularUserService {
         BalanceAccount balanceAccount = balanceAccountService.createBalanceAccount();
 
         return  UserResponse.fromUser(regularUserRepository.saveAndFlush(
-                new RegularUser(email, null, fullName, Gender.NOT_PROVIDED,
+                new RegularUser(email, "", fullName, Gender.NOT_PROVIDED,
                 address, roleService.getRole(ROLE_REGULAR), true, balanceAccount, true))
         );
     }

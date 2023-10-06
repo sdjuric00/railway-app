@@ -10,7 +10,7 @@
   • <a href="#">Bachelor Degree Project</a>
   •
   <br/>
-  • <a href="#">Demo Video YT</a>
+  • <a href="https://www.youtube.com/watch?v=opQ08rgMkDQ&ab_channel=SrdjanDjuric">Demo Video YT</a>
   •
 </p>
 
